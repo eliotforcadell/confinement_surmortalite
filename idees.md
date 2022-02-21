@@ -1,8 +1,4 @@
----
-title: "Mortalité des jeunes hommes et confinement"
----
-
-## Identification causale
+# Mortalité des jeunes hommes et confinement
 
 Proposition de sujet par O. Godechot : comparaison de la mortalité chez les jeunes hommes entre le premier et le deuxième confinement. Est-ce que le deuxième confinement a été plus léger que le premier ?  
 
@@ -21,7 +17,7 @@ Base de données « décès » de l’INSEE :
 
 -	2018 : https://www.insee.fr/fr/statistiques/4216603?sommaire=4215184
 -	2019 : https://www.insee.fr/fr/statistiques/4801913?sommaire=4768339
--	2020 : https://www.insee.fr/fr/statistiques/5431034?sommaire=5419788&q=d%C3%A9c%C3%A8s+2020
+-	2020 : https://www.insee.fr/fr/statistiques/5431034?sommaire=5419788
 
 Variables disponibles :
 
