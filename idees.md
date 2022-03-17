@@ -13,34 +13,25 @@ Son thread twitter : https://twitter.com/OlivierGodechot/status/1252001506259357
 
 ### Données disponibles 
 
-Base de données « décès » de l’INSEE :
-
--	2018 : https://www.insee.fr/fr/statistiques/4216603?sommaire=4215184
--	2019 : https://www.insee.fr/fr/statistiques/4801913?sommaire=4768339
--	2020 : https://www.insee.fr/fr/statistiques/5431034?sommaire=5419788
+Fichiers des décès quotidiens de l’INSEE, pour les années 2018, 2019, 2020, 2021 (et début 2022) : https://www.insee.fr/fr/statistiques/4487988.
 
 Variables disponibles :
 
--	Année de décès
--	Année de naissance du décédé 
--	Code géographique et libellé en clair de la commune de domicile pour les défunts domiciliés en France Métropolitaine, dans un DOM ou un COM 
--	Département de décès
--	Département de domicile du décédé 
--	Département de naissance du décédé 
--	État matrimonial du décédé
--	Indicateur de nationalité du décédé 
--	Jour du décès 
--	Jour de naissance 
--	Lieu de décès 
--	Mois de décès
--	Mois de naissance 
--	Sexe 
--	Tranche de commune du lieu de domicile du décédé 
--	Tranche d’unité urbaine du lieu de domicile du décédé 
+- Année de décès
+- Mois de décès
+- Jour de décès
+- Département de décès
+- Commune de décès
+- Année de naissance
+- Mois de naissance
+- Jour de naissance
+- Sexe
+- Commune de domicile
+- Lieu de décès
 
 Données issues des déclarations des décès des communes auprès de l’INSEE. Si les données publiées quotidiennement par l’INSEE sont d’une qualité irrégulière du fait du temps de remontée des informations variables selon les mairies, les données pour 2019 et 2020 correspondent à des données révisées, donc relativement fiables.
 
-O. Godechot souligne que l’information sur le lieu de décès est à considérer avec précaution, car elle est transmise de manière déclarative par la mairie et ne fait l’objet d’aucune vérification par l’INSEE. La rubrique « autre lieux » est une catégorie large, qui comprend également les cas où le lieu de décès n’est pas renseigné. 
+La documentation de l'INSEE souligne que l’information sur le lieu de décès est à considérer avec précaution, car elle est transmise de manière déclarative par la mairie et ne fait l’objet d’aucune vérification par l’INSEE. La rubrique « autre lieux » est une catégorie large, qui comprend également les cas où le lieu de décès n’est pas renseigné. 
 
 ### Quelques points bibliographiques
 
