@@ -31,6 +31,8 @@ ggplot(tab[periode %in% 1:2]) +
   geom_line(aes(x = factor(periode), y = ndec, group = SEXE, colour = SEXE)) +
   facet_wrap(~factor(ADEC), ncol = 1)
 
+tab
+
 
 # Seulement sur les mercredis
 deces[, weekday_dec := format(date_dec, "%a")]
