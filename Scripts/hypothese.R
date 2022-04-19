@@ -22,17 +22,20 @@ deces[, length(unique(date_dec)), keyby = .(periode, ADEC)]
 
 # Comparaison entre le début d'année et le premier confinement
 tab <- deces[date_dec != "2020-02-29" & 
-               age >= 18 & age <= 30, 
-             .(ndec = .N), keyby = .(periode, ADEC, SEXE)
-             ][data.table(periode = 1:5, njours = c(75, 56, 171, 48, 15)),
-               moydec := ndec/njours, on = "periode"]
+               age >= 18 & age < 30, 
+             .(ndec = .N), keyby = .(periode, ADEC, SEXE)]
 
-ggplot(tab[periode %in% 1:2]) +
-  geom_line(aes(x = factor(periode), y = ndec, group = SEXE, colour = SEXE)) +
+
+ggplot(tab[periode %in% 3:2]) +
+  geom_line(aes(x = factor(periode, levels = 3:2), y = ndec, group = SEXE, colour = SEXE)) +
   facet_wrap(~factor(ADEC), ncol = 1)
 
 tab
 
+
+ggplot(tab[periode %in% c(3,4)]) +
+  geom_line(aes(x = factor(periode), y = ndec, group = SEXE, colour = SEXE)) +
+  facet_wrap(~factor(ADEC), ncol = 1)
 
 # Seulement sur les mercredis
 deces[, weekday_dec := format(date_dec, "%a")]
