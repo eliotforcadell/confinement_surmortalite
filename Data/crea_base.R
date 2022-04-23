@@ -18,14 +18,14 @@ deces[, date_nais := ymd(paste(ANAIS,
 deces[, age := interval(date_nais, date_dec) %/% years(1)]
 
 
-# Dataframe évolution de la mortalité sur différentes période
+# Dataframe ?volution de la mortalit? sur diff?rentes p?riode
 evolution_mortalite <- data.frame(annee = c(2018, 2019, 2020), premier_conf_M = NA, deuxieme_conf_M = NA, 
                                   premier_conf_F = NA, deuxieme_conf_F = NA)
 
 
 
 # Nombre de mort hommes entre 18 et 30 ans, en 2018, 2019 et 2020, entre les dates du premier confinnement, 
-# seulement le premier mois pour calculer un taux de mortalité par mois comparable.
+# seulement le premier mois pour calculer un taux de mortalit? par mois comparable.
 evolution_mortalite[1,"premier_conf_M"] <- count(deces[deces$date_dec >= "2018-03-17" & deces$date_dec <= "2018-04-17" 
             & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
 
@@ -35,7 +35,7 @@ evolution_mortalite[2,"premier_conf_M"] <- count(deces[deces$date_dec >= "2019-0
 evolution_mortalite[3,"premier_conf_M"] <- count(deces[deces$date_dec >= "2020-03-17" & deces$date_dec <= "2020-04-17" 
             & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
 
-# Deuxième confinement
+# Deuxi?me confinement
 
 evolution_mortalite[1,"deuxieme_conf_M"] <- count(deces[deces$date_dec >= "2018-10-30" & deces$date_dec <= "2018-11-30" 
             & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
@@ -57,7 +57,7 @@ evolution_mortalite[2,"premier_conf_F"] <- count(deces[deces$date_dec >= "2019-0
 evolution_mortalite[3,"premier_conf_F"] <- count(deces[deces$date_dec >= "2020-03-17" & deces$date_dec <= "2020-04-17" 
             & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
 
-# Deuxième confinement
+# Deuxi?me confinement
 
 evolution_mortalite[1,"deuxieme_conf_F"] <- count(deces[deces$date_dec >= "2018-10-30" & deces$date_dec <= "2018-11-30" 
             & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
@@ -92,13 +92,13 @@ evolution_mortalite$population_M_18_30[evolution_mortalite$annee == 2018] <- 485
 evolution_mortalite$population_F_18_30[evolution_mortalite$annee == 2018] <- 4824962
 
 
-#Taux de mortalité pour 100 000 pour le mois du premier confinement chaque années
+#Taux de mortalit? pour 100 000 pour le mois du premier confinement chaque ann?es
 #Homme
 evolution_mortalite$taux_mortalite_premier_conf_M <- (evolution_mortalite$premier_conf_M/evolution_mortalite$population_M_18_30) * 100000
 # Femme
 evolution_mortalite$taux_mortalite_premier_conf_F <- (evolution_mortalite$premier_conf_F/evolution_mortalite$population_F_18_30) * 100000
 
-#Taux de mortalité pour 100 000 pour le mois du deuxieme confinement chaque années
+#Taux de mortalit? pour 100 000 pour le mois du deuxieme confinement chaque ann?es
 #Homme
 evolution_mortalite$taux_mortalite_deuxieme_conf_M <- (evolution_mortalite$deuxieme_conf_M/evolution_mortalite$population_M_18_30) * 100000
 # Femme
