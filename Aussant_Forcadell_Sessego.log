@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.18)  23 APR 2022 17:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.18)  24 APR 2022 18:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -811,6 +811,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 102--103
 
  []
 
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 104.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 104.
 
 Underfull \hbox (badness 10000) in paragraph at lines 104--105
 
@@ -821,20 +825,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 106--107
 
  []
 
-<Aussant_Forcadell_Sessego-003.pdf, id=42, 578.16pt x 289.08pt>
+<Aussant_Forcadell_Sessego-003.pdf, id=43, 578.16pt x 289.08pt>
 File: Aussant_Forcadell_Sessego-003.pdf Graphic file (type pdf)
 <use Aussant_Forcadell_Sessego-003.pdf>
 Package pdftex.def Info: Aussant_Forcadell_Sessego-003.pdf  used on input line 
 132.
 (pdftex.def)             Requested size: 400.38872pt x 200.19322pt.
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
-[2
 
- <./Aussant_Forcadell_Sessego-003.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 152--153
 
  []
@@ -854,7 +859,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 164--165
 
  []
 
+[2
 
+]
 Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
@@ -870,7 +877,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 171--172
  []
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 183.
-[3]
+[3 <./Aussant_Forcadell_Sessego-003.pdf>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 183.
  (./Aussant_Forcadell_Sessego.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 183.
@@ -881,24 +888,26 @@ ed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 183.
  ) 
 Here is how much of TeX's memory you used:
- 13265 strings out of 480608
- 196160 string characters out of 5903630
- 489162 words of memory out of 5000000
- 28837 multiletter control sequences out of 15000+600000
- 584050 words of font info for 66 fonts, out of 8000000 for 9000
+ 13296 strings out of 480608
+ 196466 string characters out of 5903630
+ 491162 words of memory out of 5000000
+ 28854 multiletter control sequences out of 15000+600000
+ 601448 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,7n,42p,745b,425s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,8n,42p,1696b,425s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
 texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/20
 20/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-d
 ist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/t
 ype1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public
-/lm/lmri10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri12
-.pfb>
-Output written on Aussant_Forcadell_Sessego.pdf (3 pages, 159882 bytes).
+/lm/lmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr7.pfb
+></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local
+/texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2
+020/texmf-dist/fonts/type1/public/lm/lmri12.pfb>
+Output written on Aussant_Forcadell_Sessego.pdf (3 pages, 224237 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
+ 100 PDF objects out of 1000 (max. 8388607)
+ 82 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
