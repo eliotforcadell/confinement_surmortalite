@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.18)  24 APR 2022 18:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.18)  24 APR 2022 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -894,7 +894,7 @@ Here is how much of TeX's memory you used:
  28854 multiletter control sequences out of 15000+600000
  601448 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,8n,42p,1696b,425s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,8n,42p,1681b,425s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
 texlive/2020/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/20
 20/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2020/texmf-d
@@ -904,7 +904,7 @@ ype1/public/lm/lmr12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public
 ></usr/local/texlive/2020/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local
 /texlive/2020/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2
 020/texmf-dist/fonts/type1/public/lm/lmri12.pfb>
-Output written on Aussant_Forcadell_Sessego.pdf (3 pages, 224237 bytes).
+Output written on Aussant_Forcadell_Sessego.pdf (3 pages, 224216 bytes).
 PDF statistics:
  100 PDF objects out of 1000 (max. 8388607)
  82 compressed objects within 1 object stream
