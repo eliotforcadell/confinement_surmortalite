@@ -57,6 +57,7 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage{hyperref} %pour les liens url
 %\usepackage[absolute,overlay]{textpos}
 
 % Pour ne pas que la mention "Chapter" apparaisse à chaque chapitre mais juste le titre du chapitre
@@ -81,7 +82,7 @@
 
 {\begin{minipage}\linewidth
         \centering
-     \textbf{ Un effet inattendu du confinement : une chute de la surmortalité violente chez les jeunes ?} \\[1 cm] 
+     \textbf{Un effet inattendu du confinement : une chute de la surmortalité violente chez les jeunes ?} \\[1 cm] 
         \vspace{0.5cm}
         \large Abel Aussant, Eliot Forcadell et Ariane Sessego\\
          M2 Quantifier en Sciences Sociales\\
@@ -105,13 +106,9 @@ En effet, le risque de décès entre 15 et 30 ans est souvent plus élevé que l
 
 Le confinement a théoriquement réduit l'exposition à ces risques, à l'exception du suicide. A-t-il entraîné une diminution de la mortalité au sein de cette population ? Le deuxième confinement, moins restrictif que le premier, a-t-il eu un impact plus faible sur cette mortalité ? \\
 
-Pour répondre à ces questions nous utilisons ici une méthode de différence de différence (\textit{diff-in-diff}) pour comparer la mortalité parmi les jeunes adultes en 2020 pendant les périodes de confinement avec celle de 2018 et 2019. En effet, \textit{Présentation succinte de la méthode de diff-in-diff} %Consistant à comparerpour comparer la mortalité parmi les jeunes adultes en 2020, par rapport à celle de 2018 et 2019, pendant les périodes de confinement, nous cherc
+La méthode de différence de différence (DD) offre la possibilité de comparer la mortalité des jeunes adultes avant et pendant les périodes de confinement en prenant en compte la saisonnalité de la mortalité et une éventuelle variation de mortalité propre à 2020. En effet, il s'agit ici d'évaluer l'effet d'un "traitement" - le confinement généralisé de la population - sur le groupe traité - les jeunes adultes. En l'absence d'expérience aléatoire, nous ne disposons pas de groupe contrôle, et toute la population étant supposée confinée, il semble difficile d'en construire un. Mais nous pouvons procéder autrement pour construire un contrefactuel, notamment en considérant les périodes précédentes. Cela suppose que l’évolution de la mortalité dans la population cible (les jeunes adultes) est comparable entre période. Or, on sait que la mortalité connait des tendances saisonnières importantes : la mortalité des jeunes adultes, en particulier, connait deux pics annuels, l'un en hiver (en février particulièrement), qui suit la tendance générale de la population, l'autre en été (en juillet), qui est lié à une augmentation estivale de mortalité par accidents (Breton, 2019). Ces tendances nous empêche de comparer simplement la période pré-confinement à la période de confinement. La DD nous permet, en supposant que l'évolution de la mortalité est comparable d'une année sur l'autre, de comparer la mortalité en 2020 (groupe traité) et pendant les années précédentes (groupe contrôle), avant les confinements (période précédent le traitement) et durant chaque confinement (période de traitement), afin de mettre en avant un eventuel effet causal du confinement sur la mortalité des jeunes adultes en France en 2020. \\
 
-
-
-\section{Données}
-
-\subsection{Présentation des données INSEE, décès par jour de décès, age et sexe, 2018 à 2020}
+Après une présentation des données et quelques analyses descriptives, nous présenterons en détail les modèles choisis, pour ensuite commenter les résultats.
 
 <<label = package_data ,fig=FALSE, echo=FALSE, include=FALSE, cache = T, results = hide>>=
 pacman::p_load(data.table, magrittr, ggplot2, ggpubr, kableExtra, questionr, lubridate)
@@ -133,11 +130,30 @@ deces$date_dc_graph <- mdy(paste0(deces$md_dec,"-2020"))
 @
 
 
+\section{Données}
+
+Pour répondre à ces questions, nous utilisons les données d'état civil mises à disposition par l'INSEE, répertoriant les personnes décédées par date de décès, année de naissance, sexe, et lieu de décès pour les années 2014 à 2020 (INSEE 2014 à 2020, voir la section \ref{source} \textit{infra}). Nous disposons du jour, du mois et de l'année de décès pour 2018 à 2020, mais uniquement du mois et de l'année de décès pour 2014 à 2017. Justification de la comparabilité des chiffres bruts de décès
+
+Nous pouvons tout d'abord souligné le faible effectif de décès 
+
+
+
+
+
+Concentrons nous tout d'abord sur les années 2018 à 2020, car ce sont les seuls années pour lesquelles nous disposons des décès par jour. 
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Quelques statistiques descriptives}
-
-
-
 
 
 Nombre de décès moyen par jour 2018-2019-2020 (environ 10,4 décès par jour), déviation standard (environ 3,5)
@@ -188,12 +204,12 @@ ggplot() +
 
 
 
-\section{Méthode}
+\section{Résultats}
 
-\subsection{La méthode de différence de différence}
+\subsection{La méthode de différence de différence et les régressions choisies}
 
 
-\subsection{Les modèles de régressions choisis}
+\subsection{Les modèles de régressions choisies}
 
 Comparer les périodes de confinements aux tendances de début d'années (on suppose que les jeunes sont peu touchés par le Covid, et que les trends du milieu d'année sont touchées par un effet Covid)\\
 
@@ -220,12 +236,17 @@ Limites : \\
 
 
 
+\section{Sources} \label{source}
 
-
-
-
-
-
+\begin{itemize}
+\item INSEE, 2020, \url{https://www.insee.fr/fr/statistiques/5431034?sommaire=5419788&q=d\%C3\%A9c\%C3\%A8s+2020}
+\item INSEE, 2019, \url{https://www.insee.fr/fr/statistiques/4801913?sommaire=4768339&q=d\%C3\%A9c\%C3\%A8s+2019}
+\item INSEE, 2018, \url{https://www.insee.fr/fr/statistiques/4216603?sommaire=4215184}
+\item INSEE, 2017, \url{https://www.insee.fr/fr/statistiques/3606190?sommaire=3596198}
+\item INSEE, 2016, \url{https://www.insee.fr/fr/statistiques/3053349?sommaire=3051496}
+\item INSEE, 2015, \url{https://www.insee.fr/fr/statistiques/2406453?sommaire=2406457}
+\item INSEE, 2014, \url{https://www.insee.fr/fr/statistiques/2114975?sommaire=2114983}
+\end{itemize}
 
 
 \end{document}
