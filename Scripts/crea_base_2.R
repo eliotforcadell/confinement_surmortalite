@@ -45,8 +45,9 @@ deces_jours_1820[deces_jours_1820[ADEC %in% c("2018", "2019"),
                       ndec_hom = i.ndec_hom), 
                  on = c("ADEC", "md_dec")]
 
-deces_jours_1820[is.na(ndec_fem), `:=`(ndec_fem = 0)]
-deces_jours_1820[is.na(ndec_hom), `:=`(ndec_hom = 0)]
+deces_jours_1820[is.na(ndec), ndec := 0]
+deces_jours_1820[is.na(ndec_fem), ndec_fem := 0]
+deces_jours_1820[is.na(ndec_hom), ndec_hom := 0]
 
 
 
