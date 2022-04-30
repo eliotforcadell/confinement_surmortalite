@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[titlepage]{article}
 
  % Dans le préambule
 %\usepackage[style=author]{biblatex} % package de bibliographie, on cite l’auteur
@@ -24,7 +24,7 @@
 \usepackage{ dsfont } %proba
 \usepackage{ stmaryrd }
 % tables et figures
-	
+\usepackage{longtable}
 \usepackage{subfigure}
 \usepackage{lscape}
 \usepackage{multirow} % permet de fusionner les colonnes
@@ -96,149 +96,223 @@
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
+\input{Aussant_Forcadell_Sessego-concordance}
 \maketitle
 
 \cleardoublepage%
 
 En 2020, les épisodes de confinements ont bouleversé la vie des Français. Ces restrictions de sortie en dehors du domicile avaient pour but de protéger les plus vulnérables du virus de la Covid-19, particulièrement les personnes âgées. Mais on peut se demander s'ils n'ont pas aussi eu des effets inattendus : le confinement a-t-il entrainé une diminution de la mortalité chez les jeunes ? \\
 
-En effet, le risque de décès entre 15 et 30 ans est souvent plus élevé que l'on ne pourrait s'y attendre face à l'augmentation exponentielle de la mortalité habituellement constatée entre 10 et 60 ans (Remund, Camarada, 2021). On désigne donc comme "surmortalité" cet excès par rapport au risque de décès attendu, qui a longtemps été considéré comme uniquement masculin, lié aux turbulences hormonales et de développement biologiques des jeunes hommes\footnote{Heligman L., Pollard J.H., The age pattern of mortality, Journal of the Institute of Actuaries, 1980, 107(1), p. 49-80 et  Goldstein J. A., Secular trend toward earlier male sexual maturity: Evidence from shifting ages of male young adult mortality, PLoS ONE, 2011, 6(8), e14826.}, et liée à des causes violentes de décès (accidents, homicides...). Ces théories développementalistes ont été largement remises en question, du fait des variations de cette tendance dans le temps et l'espace ; cette surmortalité semble avant tout liée à des contexte socio-historiques particulier (Remund, Camarada, 2021). En France aujourd'hui, bien qu'elle touche aussi les jeunes femmes, cette surmortalité est bien plus importante parmi les hommes, avec en moyenne trois fois plus de décès masculins que féminin à ces âges (Breton, Barbieri, 2018). Elle est avant tout caractérisée par une part importante d'accidents de la circulation et de morts violentes (autres types d'accidents, homicides ou suicides) qui sont l'origine de 80\% des décès à ces âges (Remund, Camarada, 2021, trouver une ref plus récente parce parle des années 1960). \\
+En effet, le risque de décès entre 15 et 30 ans est souvent plus élevé que l'on ne pourrait s'y attendre face à l'augmentation exponentielle de la mortalité habituellement constatée entre 10 et 60 ans (Remund, Camarada, 2021). On désigne donc comme "surmortalité" cet excès par rapport au risque de décès attendu, qui a longtemps été considéré comme uniquement masculin, lié aux turbulences hormonales et de développement biologiques des jeunes hommes\footnote{Heligman L., Pollard J.H., The age pattern of mortality, Journal of the Institute of Actuaries, 1980, 107(1), p. 49-80 et  Goldstein J. A., Secular trend toward earlier male sexual maturity: Evidence from shifting ages of male young adult mortality, PLoS ONE, 2011, 6(8), e14826.}, et liée à des causes violentes de décès (accidents, homicides...). Ces théories développementalistes ont été largement remises en question, du fait des variations de cette tendance dans le temps et l'espace ; on considère aujourd'hui cette surmortalité comme avant tout liée à des contextes socio-historiques particuliers (Remund, Camarada, 2021). En France aujourd'hui, bien qu'elle touche aussi les jeunes femmes, cette surmortalité est bien plus importante parmi les hommes, avec en moyenne trois fois plus de décès masculins que féminin à ces âges (Breton, Barbieri, 2018), même si cette écart à tendance à se réduire. Elle est avant tout caractérisée par une part importante de morts violentes (accidents, homicides ou suicides) qui sont l'origine de 80\% des décès à ces âges, tout particulièrement les accidents de la circulation (Remund, Camarada, 2021). \\
 
 Le confinement a théoriquement réduit l'exposition à ces risques, à l'exception du suicide. A-t-il entraîné une diminution de la mortalité au sein de cette population ? Le deuxième confinement, moins restrictif que le premier, a-t-il eu un impact plus faible sur cette mortalité ? \\
 
-La méthode de différence de différence (DD) offre la possibilité de comparer la mortalité des jeunes adultes avant et pendant les périodes de confinement en prenant en compte la saisonnalité de la mortalité et une éventuelle variation de mortalité propre à 2020. En effet, il s'agit ici d'évaluer l'effet d'un "traitement" - le confinement généralisé de la population - sur le groupe traité - les jeunes adultes. En l'absence d'expérience aléatoire, nous ne disposons pas de groupe contrôle, et toute la population étant supposée confinée, il semble difficile d'en construire un. Mais nous pouvons procéder autrement pour construire un contrefactuel, notamment en considérant les périodes précédentes. Cela suppose que l’évolution de la mortalité dans la population cible (les jeunes adultes) est comparable entre période. Or, on sait que la mortalité connait des tendances saisonnières importantes : la mortalité des jeunes adultes, en particulier, connait deux pics annuels, l'un en hiver (en février particulièrement), qui suit la tendance générale de la population, l'autre en été (en juillet), qui est lié à une augmentation estivale de mortalité par accidents (Breton, 2019). Ces tendances nous empêche de comparer simplement la période pré-confinement à la période de confinement. La DD nous permet, en supposant que l'évolution de la mortalité est comparable d'une année sur l'autre, de comparer la mortalité en 2020 (groupe traité) et pendant les années précédentes (groupe contrôle), avant les confinements (période précédent le traitement) et durant chaque confinement (période de traitement), afin de mettre en avant un eventuel effet causal du confinement sur la mortalité des jeunes adultes en France en 2020. \\
+La méthode de différence de différence (DD) nous offre la possibilité de comparer la mortalité des jeunes adultes avant et pendant les périodes de confinement en prenant en compte la saisonnalité de la mortalité et une éventuelle variation de mortalité propre à 2020. En effet, il s'agit ici d'évaluer l'effet d'un "traitement" - le confinement généralisé de la population - sur un groupe traité - les jeunes adultes. En l'absence d'expérience aléatoire, nous ne disposons pas de groupe contrôle; et comme toute la population étant supposée confinée, il semble difficile d'en construire un. Mais nous pouvons procéder autrement pour construire un contrefactuel, notamment en considérant les périodes précédentes. Cela suppose cependant que l’évolution de la mortalité dans la population cible (les jeunes adultes) est comparable entre période. Or, on sait que la mortalité connait des tendances saisonnières importantes : la mortalité des jeunes adultes, en particulier, connait deux pics annuels, un plus faible en hiver (en février particulièrement), qui suit la tendance générale de la population, l'autre plus important en été (en juillet), qui est lié à une augmentation estivale de mortalité par accidents (Breton, 2019). Ces tendances nous empêche de comparer simplement la période pré-confinement à la période de confinement. La DD nous permet, en supposant que l'évolution de la mortalité est comparable d'une année sur l'autre, de comparer la mortalité en 2020 (groupe traité) et pendant les années précédentes (groupe contrôle), avant les confinements (période précédent le traitement) et durant chaque confinement (période de traitement), afin de mettre en avant un eventuel effet causal du confinement sur la mortalité des jeunes adultes. \\
 
 Après une présentation des données et quelques analyses descriptives, nous présenterons en détail les modèles choisis, pour ensuite commenter les résultats.
 
-<<label = package_data ,fig=FALSE, echo=FALSE, include=FALSE, cache = T, results = hide>>=
-pacman::p_load(data.table, magrittr, ggplot2, ggpubr, kableExtra, questionr, lubridate)
+
+\section*{Données et méthode}
+
+<<label = packages_data , echo = F, results = hide, cache = F >>=
+#knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      #fig.align = 'center', fig.height = 5, fig.width = 8)
+
+pacman::p_load(data.table, magrittr, ggplot2, ggpubr, kableExtra, smoother, lubridate)
 theme_set(theme_minimal())
 year_colours <- viridis::magma(2, begin = 0.3, end = 0.7)
 
-#setwd("~/Library/Mobile\ Documents/com~apple~CloudDocs/Ariane/ENS/2021_2022_QESS_M2/QESS_Identification_causale/Validation/confinement_surmortalite")
 # On conserve les 18-29 ans et on enlève le 29 février 2020
-deces <- fread("Data/deces_2018-2022.csv")[ADEC %in% 2018:2020 & 
-                                             age >= 18 & age < 30 & 
-                                             date_dec != "2020-02-29"]
+deces <- fread("Data/deces_jours_2014-2020.csv")
+@
 
-deces[, md_dec := format(date_dec, "%m-%d")]
 
-# str(deces$md_dec)
-deces$date_dc_graph <- mdy(paste0(deces$md_dec,"-2020"))
+\subsubsection*{Les décès d'individus de 18 à 29 ans par date, en France métropolitaine, de 2014 à 2020}
+
+Pour répondre à ces questions, nous utilisons les données d'état civil mises à disposition par l'INSEE, répertoriant les personnes décédées par date de décès, année de naissance, sexe, et lieu de décès pour les années 2014 à 2020 (INSEE 2014 à 2020, voir Sources, \textit{infra}). Nous disposons du jour, du mois et de l'année de décès pour 2018 à 2020, mais uniquement du mois et de l'année de décès pour 2014 à 2017. \\
+
+Nous considérons ici les décès d'individus âgés de 18 à 29 ans (age révolu au moment du décès), afin de prendre en compte cette population de jeunes adultes en âge de conduire, les accidents de la circulation étant parmi les premières causes de décès chez les jeunes (INSERM, 2020) et le risque qui aurait le plus diminué durant le confinement. Nous avons de plus fait le choix de ne considérer que les décès survenus en France métropolitaine, d'une part car la littérature concernant les Outre-mer est plus rare et il est fort probable que la mortalité ne suive pas les mêmes tendance, étant donné la différence des saisons et des périodes de congé, et d'autre part car l'application du confinement, particulièrement pour le deuxième, y a été différente. \\
+
+%Nous pouvons ici considérer le nombre de décès journaliers (en imputant une moyenne par jour pour les années précédent 2018) en considérant 
+
+Nous raisonnerons ici par nombre de décès bruts, et non par taux de mortalité, car cela nécessiterait de rapporter ces décès brut à la taille de la population des jeunes adultes sur chaque période. En effet, d’après l’INSEE, de 2014 à 2020, la population des 18-29 ans a évolué de 9,4 millions à 9,3 millions (INSEE, 2022), une variation de l’ordre de 0,1\%, que l'on peut considérer comme négligeable. De plus, le raisonnement en nombre de décès permet de conserver un ordre de grandeur familier et directement interprétable par les non-démographes. \\ % Enfin, cette évolution tend vers une légère diminution du nombre de jeunes de 18 à 29 ans, ce qui tendrait à diminuer le nombre de décès
+
+Les périodes de confinement que nous considérons sont les suivantes : ...
+
+\subsubsection*{Une faible mortalité absolue des jeunes adultes rendant plus difficile l'identification d'une tendance}
+
+De 2014 à 2020, au total 25 481 jeunes adultes de 18 à 29 ans sont décédés en France métropolitaine, avec un effectif de décès par année stable de l'ordre de 3 600 décès. En moyenne, il y 10 décès par jour sur toute la période avec une légère baisse de cette moyenne en 2019 (9,9 décès par jour) et 2020 (9,7 décès par jour), mais qu'il est difficile d'interpréter pour le moment. L'écart-type des décès par jour est également plutôt stable en fonction de la période considérée, allant de 3.3 à 3.5. L'écart-type de 2.3 indiqué sur l'ensemble de la période est artificiellement bas puisque nous imputons à chaque jour le nombre de décès de ce mois mois divisé par le nombre de jour dans ce mois, réduisant artificiellement la variation des décès par jour. Il n'est donc pas possible de tirer de conclusion à partir de ce chiffre. \\
+
+<<label = moyenne_variance , echo = F, results = tex, cache = F>>=
+
+descr <- function(var){
+  as.numeric(c(sum(var), mean(var), median(var), sd(var), max(var), min(var)))
+}
+
+des <- as.data.frame(rbind(
+      c(descr(deces$ndec[deces$ADEC %in% c(2014:2020)])),
+      c(descr(deces$ndec[deces$ADEC %in% c(2018, 2019)])),
+      c(descr(deces$ndec[deces$ADEC == 2018])),
+      c(descr(deces$ndec[deces$ADEC == 2019])),
+      c(descr(deces$ndec[deces$ADEC == 2020]))
+      ))
+colnames(des) <- c("Effectif total sur la période", "Moyenne", "Médiane", "Ecart-type", "Maximum", "Minimum")
+rownames(des) <- c("2014-2020*", "2018-2019","2018", "2019", "2020")
+
+
+des %>%
+  kbl(caption = "Statistiques descriptives du nombre de décès journalier des 18 à 29 ans",
+        #col.names = c("Frequency", "Percentages"),
+        format = "latex",
+        booktabs = T,
+      digits = c(0,1,1,1,1,1),
+        label = "Descr") %>%
+    footnote(general = c("*Pour 2014 à 2017, comme nous disposons que du mois de décès, nous avons imputé un n-ème du nombre de décès par mois, avec n le nombre de jours dans le mois.",
+                         "Source : INSEE, 2014 à 2020.", 
+             "Champ : Décès de personnes agées de 18 à 29 ans survenus en France métropolitaine de 2014 à 2020.", 
+             "Lecture : En 2020, 3 538 jeunes adultes âgés de 18 à 29 ans sont décédés, avec une moyenne de 9,7 décès par jours, et un écart-type de décès par jours de 3,4. Au cours de l'année, il y a eu au maximum 20 décès de jeunes adultes et au minimum aucun décès survenus en un jour."
+             ),
+             general_title = "",
+             fixed_small_size = T,
+             threeparttable = T,
+             escape = F,
+             #footnote_as_chunk = T
+             ) %>%
+    kable_classic(full_width = F, html_font = "Cambria") %>% 
+  kable_styling(latex_options = "hold_position") #%>%    
+ #save_kable("~/Nextcloud/CausesmultiplesAfrique/DataHDSS/Stat_desc/Tableau_Sites_des_uk.pdf")
 
 
 @
 
+On peut tout d'abord souligner que ces effectifs journaliers de décès sont faibles, du fait de la faible mortalité des jeunes adultes, ce qui est - dans l'absolu - réjouissant. Cependant, le nombre de décès étant nécessairement un entier, cela implique des variations importantes, rendant difficile l'identification d'une tendance. Or, la DD repose sur le postula qu'il y ait une évolution identique de la variable d'intérêt - ici le nombre de décès des jeunes adultes - dans les deux groupes avant le traitement (2020 avant le confinement et les années précédentes), ce que l'on souhaiterait pouvoir apprécier avant d'estimer les modèles. \\
 
-\section{Données}
+Les Figures \ref{fig:courbe_2018_2019} et \ref{} cherchent à dégager ces évolutions et les comparer aux tendances pendant les confinements. Les lignes grises sur la Figure 1 représentant les évolutions brutes du nombre de décès par jour pour les années 2018 à 2020 montre à quel point il est difficile d'en dégager les tendances sans une analyse plus poussée. Nous avons donc procédé à un lissage des tendances par l'intermédiaire de la méthode des fenêtres gaussiennes. Chaque point de la courbe lissé est estimé en fonction d'une pondération des fréquences observée de part et d'autre du point, par l'intermédiaire de coefficients estimés par l'intermédiaire d'une fonction gaussienne calculée sur un fenêtre de temps déterminée\footnote{Pour le détail de la méthode voir : \url{https://au.mathworks.com/help/signal/ref/gausswin.html}, les paramètres utilisés ici sont : }. \textit{EEEeuuuh, je n'ai aucune idée si cette phrase a du sens, mais j'ai l'impression de me comprendre}. Ce lissage nous laisse entrevoir une certaine diminution du nombre décès au cours de la période du premier confinement, par rapport aux années 2018 et 2019. Cependant, mais il est difficile d'interpréter les courbes car on peut encore percevoir la très forte volatilité du nombre de décès. Les tendances pré-confinement ne coïncident pas entièrement de 2018 à 2020, avec en particulier une légère augmentation en 2020 juste avant le premier confinement qui pourrait apparaitre comme une surmortalité par rapport aux deux années précédentes. Serait-ce dû à une surmortalité due à la Covid-19? Cela semble très peu probable étant donné que les formes graves de la maladie ont très peu touchées les jeunes adultes. Il semble difficile d'apprécier ici la moindre différence ou convergence car les variations demeurent faibles (en dessous d'un peu moins de deux écart-types). \\
 
-Pour répondre à ces questions, nous utilisons les données d'état civil mises à disposition par l'INSEE, répertoriant les personnes décédées par date de décès, année de naissance, sexe, et lieu de décès pour les années 2014 à 2020 (INSEE 2014 à 2020, voir la section \ref{source} \textit{infra}). Nous disposons du jour, du mois et de l'année de décès pour 2018 à 2020, mais uniquement du mois et de l'année de décès pour 2014 à 2017. Justification de la comparabilité des chiffres bruts de décès
-
-Nous pouvons tout d'abord souligné le faible effectif de décès 
-
-
-
-
-
-Concentrons nous tout d'abord sur les années 2018 à 2020, car ce sont les seuls années pour lesquelles nous disposons des décès par jour. 
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Quelques statistiques descriptives}
-
-
-Nombre de décès moyen par jour 2018-2019-2020 (environ 10,4 décès par jour), déviation standard (environ 3,5)
-Il faut juste que je mette en forme les données
-
-<<label = package_data ,fig=FALSE, echo=FALSE, include=FALSE, cache = T, results = hide>>=
-
-dc_jour <-  freq(deces$date_dec) 
-dc_jour$jour <- rownames(dc_jour)
-dc_jour$jour <- ymd(dc_jour$jour)
-str(dc_jour$jour)
-summary(dc_jour$n)
-sd(dc_jour$n)
-summary(dc_jour$n[year(dc_jour$jour) == 2020])
-sd(dc_jour$n[year(dc_jour$jour) == 2020])
-sd(dc_jour$n[year(dc_jour$jour) == 2018])
-sd(dc_jour$n[year(dc_jour$jour) == 2019])
-summary(dc_jour$n[year(dc_jour$jour) == 2018])
-summary(dc_jour$n[year(dc_jour$jour) == 2019])
-@
-
+\begin{figure}
 \begin{center}
-\begin{figure}[h!]
-\caption{\label{Graph_descr}Tendances mortalité par jour (gaussian smoothing)}
-<<echo=F,eval=T,fig = T,width = 8,height = 4>>=
+<<label = courbe_2018_2019, echo = F, results = hide, cache = F, fig = T, out.width = '25cm', out.height = '15cm'>>=
+theme_set(theme_minimal())
 
-ggplot() + 
-    geom_density(data = deces, aes(x=date_dc_graph, group = ADEC, color = as.factor(ADEC)), 
-                 kernel = "gaussian", bw = 7)   +
-  scale_x_date(limits = c(ymd("2020-01-01"),ymd("2020-12-31"))) +
-  geom_vline(xintercept = ymd("2020-03-17")) +
-  geom_vline(xintercept = ymd("2020-05-11"))+
-  geom_vline(xintercept = ymd("2020-10-30")) +
-  geom_vline(xintercept = ymd("2020-12-15"))# +
-  # facet_wrap(~ factor(SEXE))
+deces_jours <- fread("Data/deces_jours_2014-2020.csv")[md_dec != "02-29"]
 
-#dc_day <- deces %>% group_by(ADEC) %>% freq(date_dc_graph)
+# Numéro du jour de l'année et nom du jour de la semaine
+corresp_numjour <- data.table(md_dec = format(seq(ymd("2018-01-01"), 
+                                                  ymd("2018-12-31"), 
+                                              by="days"), "%m-%d"),
+                              numjour = 1:365)
+deces_jours[corresp_numjour, numjour := i.numjour, on = "md_dec"]
+
+## Lissage Gaussian du nombre de morts par jour sur une fenêtre de 30 jours
+deces_plot1820 <- deces_jours[ADEC %in% 2018:2020
+][data.table(date_dec = sort(deces_jours[ADEC %in% 2018:2020]$date_dec),
+             smooth_dec = smth.gaussian(deces_jours[ADEC %in% 2018:2020
+                                                    ][order(date_dec), ndec],
+                                        window = 30, alpha = 2.5)),
+  smooth_dec := i.smooth_dec,
+  on = "date_dec"]
+plot_sd1819 <- deces_jours[
+  ADEC %in% 2018:2019, 
+  .(ndec = mean(ndec),
+    sd = sd(ndec),
+    ADEC = "2018-2019",
+    numjour = unique(numjour)), 
+  keyby = md_dec]
+
+ggplot(deces_plot1820) +
+  geom_rect(aes(xmin = deces_plot1820[md_dec == "03-17", unique(numjour)], 
+                xmax = deces_plot1820[md_dec == "05-10", unique(numjour)], 
+                ymin = -Inf, ymax = Inf), alpha = 0.1, fill = "grey80") +
+  geom_rect(aes(xmin = deces_plot1820[md_dec == "10-30", unique(numjour)], 
+                xmax = deces_plot1820[md_dec == "12-14", unique(numjour)], 
+                ymin = -Inf, ymax = Inf), alpha = 0.1, fill = "grey80") +
+    geom_line(aes(x = numjour, 
+                y = ndec,
+                group = ADEC),
+                colour = "grey85") +
+  geom_vline(xintercept = deces_plot1820[md_dec == "03-17", unique(numjour)], colour = "grey50") +
+  geom_vline(xintercept = deces_plot1820[md_dec == "05-10", unique(numjour)], colour = "grey50") +
+  geom_vline(xintercept = deces_plot1820[md_dec == "10-30", unique(numjour)], colour = "grey50") +
+  geom_vline(xintercept = deces_plot1820[md_dec == "12-14", unique(numjour)], colour = "grey50") +
+
+  geom_line(aes(x = numjour, 
+                y = smooth_dec,
+                group = ADEC,
+                colour = factor(ADEC))) +
+  ylim(0,23) +
+  scale_colour_viridis_d("Année", end = 0.8, option = "F") +
+  labs(y = "Nombre de morts", x = "Jour",
+       title = "",
+       caption = "Source : INSEE, 2018-2020 \n
+       Champ : Décès de personnes agées de 18 à 29 ans survenus en France métropolitaine de 2014 à 2020 (en enlevant le 29 février 2016 et 2020.")
+
 
 
 @
-\end{figure}
 \end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+<<label = courbe_2014_2020, echo = F, results = hide, cache = F, fig = T,  width = 8, height = 5>>=
+rbind(deces_jours[ADEC %in% 2014:2019, 
+                  .(ndec = sum(ndec)), keyby = .(MDEC, ADEC)
+                  ][, .(ndec = mean(ndec),
+                        ADEC = "2014-2019",
+                        sd = sd(ndec)), keyby = MDEC
+                  ][, `:=`(ci_low = ndec - 1.96*sd,
+                           ci_high = ndec + 1.96*sd)],
+      deces_jours[ADEC == 2020, .(ADEC = 2020,
+                                  ndec = sum(ndec)), keyby = MDEC], 
+      fill = T) %>%
+  ggplot() +
+  geom_ribbon(aes(ymin = ci_low, ymax = ci_high, x = MDEC, 
+                  group = ADEC), 
+              linetype = "blank", fill = "orange", alpha = 0.1) +
+  geom_line(aes(x = MDEC, y = ndec, 
+                group = ADEC, colour = factor(ADEC))) +
+  geom_line(aes(y = ci_low, x = MDEC, group = ADEC), 
+            linetype = "dashed", colour = "orange") +
+  geom_line(aes(y = ci_high, x = MDEC, group = ADEC), 
+            linetype = "dashed", colour = "orange") +
+  scale_colour_manual("Années", values = c("orange", "cornflowerblue")) +
+  scale_x_continuous(breaks = 1:12) +
+  labs(x = "Mois", y = "Nombre de morts")
+@
+\end{center}
+\end{figure}
+
+% Ne pas oublier de mentionner quelque part que l'on supprime le 29 février de l'analyse
+
+Cela peut s'expliquer par nombreux biais conjoncturels qui peuvent avoir une influence sur la mortalité mais surtout un aléa important car les effectifs des décès parmi les jeunes adultes sont si faibles. C'est ce qui nous a inviter à introduire les années 2014 à 2017 dans la comparaison, bien que nous ne disposons pas du jour exact de décès La Figure 2 présente le nombre de décès par mois en 2020 par rapport à la moyenne des décès par mois de 2014 à 2019 et un intervalle de confiance à 90\%, afin de mettre en évidence une éventuelle tendance sous-jacente au nombre de décès de jeunes adultes par mois. \\
+
+L'on retrouve ici des résultats démontrés dans la littérature : deux pics annuels de mortalité parmi les jeunes, l'un plus faible en hiver (entre janvier et mars sur notre graphique) et l'autre plus important en été (en juillet) (Breton, 2019). L'intervalle de confiance demeure important, cependant le nombre de décès au cours des mois d'avril et de novembre-décembre en 2020 ce situent en dehors de celui-ci, ce qui semble confirmer notre hypothèse d'une réduction de la mortalité des jeunes adultes au court des périodes de confinement par rapport aux années précédentes. De plus, la tendance observées pour janvier, février et mars 2020 suivent de manière convaincantes celle des années 2014 à 2019, tendant à conforter l'idée d'une évolution identique de la mortalité entre année avant la survenue du confinement. \\
+
+Cependant, en comparant l'évolution du nombre de décès entre mai et septembre pour l'année 2020 par rapport aux années 2014 à 2019, on peut se demander si le confinement ne pourrait pas avoir eu l'effet inverse que celui attendu après la fin des restrictions. En effet, on observe dans la Figure 2, tout comme dans la Figure 3, une augmentation du nombre de décès de mai à août. On peut en effet supposer que les restrictions imposées lors du confinement, bien qu'elles aient pu avoir un effet protecteur pour les jeunes adultes lors du confinement, ont pu occasionner un effet rebond au cours de la période estivale qui a suivi, où l'intensité des activités à repris de plus belles pour compenser les restrictions des mois précédents. Ainsi, si le confinement a permis de sauver des vies, le même nombre de vie n'a-t-il pas été perdu au court de l'été qui a suivi ? Quel effet du confinement sur le long terme ? \\
+
+\textit{Je n'arrive pas à changer la taille des figures... Je ne sais pas pourquoi, mais je pense que ça devrait être réglable, pour les faire rentrer sur toute la largeur de la page}
+
+
+
+\section*{Modèles et résultats}
+
+\subsubsection*{Les modèles de régressions choisies}
+
+Nous chercherons à répondre à ces questions par l'intermédiaire des modèles suivants.
+
+
+\section*{Conclusion (et Discussion?)}
 
 
 
 
 
 
-
-
-\section{Résultats}
-
-\subsection{La méthode de différence de différence et les régressions choisies}
-
-
-\subsection{Les modèles de régressions choisies}
-
-Comparer les périodes de confinements aux tendances de début d'années (on suppose que les jeunes sont peu touchés par le Covid, et que les trends du milieu d'année sont touchées par un effet Covid)\\
-
-- Ajouter un effet année \\
-
-- Ajouter un effet weekend \\
-
-- Se demander si la diminution de la mortalité pendant le confinement n'est pas contrebalancée par une augmentation de la mortalité post-confinement ? (il semblerait que pas totalement)\\
-
-
-
-
-
-\section{Résultats et Discussion}
-
-Régressions \\
-
-
-Limites : \\
-
-- Les faibles effectifs font que les tendances sont assez chaotiques, il faudrait comparer sur plus longtemps. \\
-
-- Trop peu d'effectifs pour comparer homme/femme. \\
-
-
-
-\section{Sources} \label{source}
+\section*{Sources} \label{source}
 
 \begin{itemize}
+\item INSEE, 2022, \url{https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm#!y=2015&a=18,30&v=2&c=0}
+
 \item INSEE, 2020, \url{https://www.insee.fr/fr/statistiques/5431034?sommaire=5419788&q=d\%C3\%A9c\%C3\%A8s+2020}
 \item INSEE, 2019, \url{https://www.insee.fr/fr/statistiques/4801913?sommaire=4768339&q=d\%C3\%A9c\%C3\%A8s+2019}
 \item INSEE, 2018, \url{https://www.insee.fr/fr/statistiques/4216603?sommaire=4215184}
@@ -246,6 +320,8 @@ Limites : \\
 \item INSEE, 2016, \url{https://www.insee.fr/fr/statistiques/3053349?sommaire=3051496}
 \item INSEE, 2015, \url{https://www.insee.fr/fr/statistiques/2406453?sommaire=2406457}
 \item INSEE, 2014, \url{https://www.insee.fr/fr/statistiques/2114975?sommaire=2114983}
+
+\item INSERM, 2020 \url{http://cepidc-data.inserm.fr/inserm/html/index2.htm}
 \end{itemize}
 
 
