@@ -1,0 +1,408 @@
+---
+title : "Modèles"
+output:
+  bookdown::pdf_document2:
+    keep_tex: yes 
+    latex_engine: lualatex
+    toc: no
+    extra_dependencies: ["flafter"]
+mainfont: "Times New Roman"
+fontsize: 12pt
+# bibliography: biblio.bib
+# csl: le-tapuscrit-author-date.csl
+header-includes:
+  - \usepackage[french]{babel}
+  - \usepackage[autostyle=true]{csquotes}
+  - \addto\captionsfrench{\renewcommand{\tablename}{Tableau}}
+  - \usepackage{setspace}
+  - \usepackage{float}
+  - \usepackage{geometry}
+  - \usepackage{pdflscape}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{threeparttable}
+  - \usepackage{etoolbox}
+  - \appto\TPTnoteSettings{\linespread{1}\footnotesize}
+  - \usepackage{threeparttablex}
+  - \usepackage{multirow}
+  - \usepackage{array}
+  - \usepackage{siunitx}
+  - \sisetup{output-decimal-marker={,}, table-number-alignment=center, table-text-alignment=center, table-align-text-pre = false, table-align-text-post = false,detect-weight}
+  - \newcolumntype{d}{S[table-format=1.2]}
+  - \usepackage[width=0.90\textwidth]{caption}
+  - \setcounter{secnumdepth}{0}
+  - \usepackage{amsmath}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
+                      fig.align = 'center', fig.height = 5.5, fig.width = 9)
+options(OutDec = ",")
+pacman::p_load(data.table, lubridate, magrittr, modelsummary, lfe,
+               ggplot2, ggpubr, foreign, kableExtra, forcats)
+theme_set(theme_minimal())
+year_colours <- viridis::magma(2, begin = 0.3, end = 0.7)
+
+deces_jours <- fread("../Data/deces_jours_2014-2020.csv")[md_dec != "02-29"]
+labs_per <- c("1 jan - 16 mar", "17 mar - 10 mai", "11 mai - 29 oct",
+              "30 oct - 14 déc", "15 déc - 31 déc")
+
+
+deces_jours[, periode := factor(periode)]
+deces_jours[, periode_bis := fifelse(periode %in% 2:3, "2-3", 
+                                     as.character(periode))]
+deces_jours[, numjour := format(date_dec, "%j")]
+
+## Variables dichotomique pour chaque année
+lapply(2014:2020, function(an) {
+  deces_jours[, paste0("dicho_", an) := factor(fifelse(ADEC == an, 1, 0))]})
+
+## Variable dichotomique pour chaque période
+lapply(1:4, function(per) {
+  deces_jours[, paste0("periode", per) := factor(fifelse(periode == per, 1, 0))]})
+
+deces_jours[, periode23 := factor(fifelse(periode_bis == "2-3", 1, 0))]
+
+## Labels pour mise en page tableaux
+reglabs <- c("(Intercept)" = "Intercept",
+             "weekend" = "Week-end",
+             "Num.Obs." = "Observations",
+             "R2" = "R2", 
+             "R2 Adj." = "R2 ajusté",
+             setNames(c(2015:2020), 
+                      paste0("dicho_", 2015:2020, "1")),
+             setNames(c("17 mars - 10 mai", 
+                        "17 mars - 29 oct", 
+                        "30 oct - 14 déc"), 
+                      paste0("periode", c(2, 23, 4), "1")),
+             setNames(paste("2020 x", c("17 mars - 10 mai", 
+                                        "17 mars - 29 oct", 
+                                        "30 oct - 14 déc")),
+                      paste("dicho_20201 ×", 
+                             paste0("periode", c(2, 23, 4), "1"))))
+
+
+```
+
+Modèle simple :
+\begin{equation}
+\mathrm{Décès}_{it} = \beta_0 + \beta_1 \mathrm{Année}_i + \beta_2 \mathrm{Période}_t + \beta_3 (\mathrm{Année}_i \times \mathrm{Période}_t) + \epsilon_i
+\end{equation}
+
+
+Modèle avec indicatrice de week-end :
+\begin{equation}
+\begin{aligned}
+  \textrm{Décès}_{it} = \beta_0 &+ \beta_1 \textrm{Année}_i + \beta_2 \textrm{Période}_t + \beta_3 (\textrm{Année}_i \times \textrm{Période}_t)\\
+   &+ \beta_4 \textrm{Week-end} + \epsilon_i
+\end{aligned}
+\end{equation}
+
+
+Modèle à effets fixes $\alpha_j$ sur les jours de l'année (*je sais pas comment écrire l'équation...*) :
+\begin{equation}
+\begin{aligned}
+  \textrm{Décès}_{ijt} = \beta_0 &+ \beta_1 \textrm{Année}_i + \beta_2 \textrm{Période}_t + \beta_3 (\textrm{Année}_i \times \textrm{Période}_t)\\
+   &+ \beta_4 \textrm{Week-end} + \alpha_j + \epsilon_i
+\end{aligned}
+\end{equation}
+
+Dates des différents confinements : 
+
+- Avant confinement : 1er janvier - 16 mars
+- Premier confinement : 17 mars - 10 mai
+- Entre-deux-confinements : 11 mai - 29 octobre
+- Deuxième confinement : 30 octobre - 14 décembre
+
+\begin{landscape}
+```{r conf1}
+reg1820_conf1 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                        periode23 + dicho_2020:periode23,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_conf1_weekend <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                                periode23 + dicho_2020:periode23 + weekend,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_conf1_fe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                           periode23 + dicho_2020:periode23 + 
+                           weekend|numjour|0|0,
+                          data = deces_jours[periode %in% 1:3 & 
+                                               ADEC %in% 2018:2020])
+
+
+reg1420_conf1 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                        dicho_2018 + dicho_2019 + dicho_2020 + 
+                        periode23 + dicho_2020:periode23,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2014:2020])
+
+reg1420_conf1_weekend <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                                dicho_2018 + dicho_2019 + dicho_2020 + 
+                                periode23 + dicho_2020:periode23 + weekend,
+                              data = deces_jours[periode %in% 1:3 & 
+                                                   ADEC %in% 2014:2020])
+
+reg1420_conf1_fe <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                           dicho_2018 + dicho_2019 + dicho_2020 + 
+                           periode23 + dicho_2020:periode23 + 
+                           weekend|numjour|0|0,
+                         data = deces_jours[periode %in% 1:3 & 
+                                              ADEC %in% 2014:2020])
+
+
+tab <- modelsummary(list(reg1820_conf1, 
+                         reg1820_conf1_weekend, 
+                         reg1820_conf1_fe,
+                         reg1420_conf1, 
+                         reg1420_conf1_weekend, 
+                         reg1420_conf1_fe),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:9)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", rep(c("(1)", "(2)", "(3)"), 2))
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      caption = "Effet du premier confinement sur le nombre de décès journaliers des 18-29 ans", 
+      linesep = "",
+      align = c("l", rep("c", 6))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position")) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  add_header_above(c("", "2018-2019" = 3, "2014-2019" = 3),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 10 mai.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+
+```
+
+
+```{r conf2}
+reg1820_conf2 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                        periode4 + dicho_2020:periode4,
+                      data = deces_jours[periode %in% c(1,4) & 
+                                           ADEC %in% 2018:2020])
+reg1820_conf2_weekend <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                                periode4 + dicho_2020:periode4 +
+                                weekend,
+                              data = deces_jours[periode %in% c(1,4) & 
+                                                   ADEC %in% 2018:2020])
+
+
+reg1420_conf2 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                        dicho_2018 + dicho_2019 + dicho_2020 + 
+                        periode4 + dicho_2020:periode4,
+                      data = deces_jours[periode %in% c(1,4) & 
+                                           ADEC %in% 2014:2020])
+reg1420_conf2_weekend <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                                dicho_2018 + dicho_2019 + dicho_2020 + 
+                                periode4 + dicho_2020:periode4 +
+                                weekend,
+                              data = deces_jours[periode %in% c(1,4) & 
+                                                   ADEC %in% 2014:2020])
+
+tab <- modelsummary(list(reg1820_conf2,
+                         reg1820_conf2_weekend,
+                         reg1420_conf2,
+                         reg1420_conf2_weekend),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:7)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", rep(c("(1)", "(2)"), 2))
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      caption = "Effet du deuxième confinement sur le nombre de décès journaliers des 18-29 ans", 
+      linesep = "",
+      align = c("l", rep("c", 4))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position")) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  add_header_above(c("", "2018-2019" = 2, "2014-2019" = 2),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 16 mars et du 30 octobre au 14 décembre.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+
+```
+
+
+```{r per23}
+reg1820_per23 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                        periode23 + dicho_2020:periode23,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_per23_weekend <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                                periode23 + dicho_2020:periode23 + weekend,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_per23_fe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                           periode23 + dicho_2020:periode23 + 
+                           weekend|numjour|0|0,
+                          data = deces_jours[periode %in% 1:3 & 
+                                               ADEC %in% 2018:2020])
+
+
+reg1420_per23 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                        dicho_2018 + dicho_2019 + dicho_2020 + 
+                        periode23 + dicho_2020:periode23,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2014:2020])
+
+reg1420_per23_weekend <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                                dicho_2018 + dicho_2019 + dicho_2020 + 
+                                periode23 + dicho_2020:periode23 + weekend,
+                              data = deces_jours[periode %in% 1:3 & 
+                                                   ADEC %in% 2014:2020])
+
+reg1420_per23_fe <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                           dicho_2018 + dicho_2019 + dicho_2020 + 
+                           periode23 + dicho_2020:periode23 + 
+                           weekend|numjour|0|0,
+                         data = deces_jours[periode %in% 1:3 & 
+                                              ADEC %in% 2014:2020])
+
+tab <- modelsummary(list(reg1820_per23, 
+                         reg1820_per23_weekend, 
+                         reg1820_per23_fe,
+                         reg1420_per23, 
+                         reg1420_per23_weekend, 
+                         reg1420_per23_fe),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:9)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", rep(c("(1)", "(2)", "(3)"), 2))
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      caption = "Effet du premier confinement et de la période d'entre-deux-confinement sur le nombre de décès journaliers des 18-29 ans", 
+      linesep = "",
+      align = c("l", rep("c", 6))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position")) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  add_header_above(c("", "2018-2019" = 3, "2014-2019" = 3),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 29 octobre.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+
+```
+
+
+```{r conf1-sexe}
+regfem1820_conf1_fe <- felm(ndec_fem ~ dicho_2019 + dicho_2020 + periode2 + 
+                              dicho_2020:periode2 + weekend|numjour|0|0,
+                         data = deces_jours[periode %in% c(1,2) & 
+                                              ADEC %in% 2018:2020])
+
+regfem1420_conf1_fe <- felm(ndec_fem ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                              dicho_2018 + dicho_2019 + dicho_2020 + 
+                              periode2 + dicho_2020*periode2 + 
+                              weekend|numjour|0|0,
+                         data = deces_jours[periode %in% c(1,2) & 
+                                              ADEC %in% 2014:2020])
+
+reghom1820_conf1_fe <- felm(ndec_hom ~ dicho_2019 + dicho_2020 + periode2 + 
+                              dicho_2020:periode2 + weekend|numjour|0|0,
+                         data = deces_jours[periode %in% c(1,2) & 
+                                              ADEC %in% 2018:2020])
+
+reghom1420_conf1_fe <- felm(ndec_hom ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                              dicho_2018 + dicho_2019 + dicho_2020 + 
+                              periode2 + dicho_2020*periode2 + 
+                              weekend|numjour|0|0,
+                         data = deces_jours[periode %in% c(1,2) & 
+                                              ADEC %in% 2014:2020])
+
+tab <- modelsummary(list(regfem1820_conf1_fe, 
+                         regfem1420_conf1_fe,
+                         reghom1820_conf1_fe, 
+                         reghom1420_conf1_fe),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:7)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", rep(c("(3)"), 4))
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      caption = "Effet différencié du premier confinement sur le nombre de décès journaliers des 18-29 ans chez les femmes et chez les hommes", 
+      linesep = "",
+      align = c("l", rep("c", 4))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position")) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  add_header_above(c("", rep(c("2018-2019" = 1, 
+                               "2014-2019" = 1),2)),
+                   bold = F, line = F) %>%
+    add_header_above(c("", "Femmes" = 2, "Hommes" = 2),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 10 mai.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+
+```
+\end{landscape}
+
+
+```{r test, eval = F}
+library(lmtest)
+
+lrtest(reg1820_conf1, reg1820_conf1_weekend)
+lrtest(reg1820_conf1_weekend, reg1820_conf1_fe)
+
+lrtest(reg1820_conf2, reg1820_conf2_weekend)
+
+lrtest(reg1420_conf1, reg1420_conf1_weekend)
+lrtest(reg1420_conf1_weekend, reg1420_conf1_fe)
+
+lrtest(reg1420_conf2, reg1420_conf2_weekend)
+
+
+```
+
+
