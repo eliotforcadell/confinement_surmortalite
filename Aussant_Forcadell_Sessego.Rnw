@@ -7,7 +7,7 @@
 %%%%% Tous les packages
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage[utf8]{inputenc}% accents in
-\usepackage[english]{babel}% typo française
+\usepackage[french]{babel}% typo française
 \usepackage[T1]{fontenc}% accents out
 \usepackage{lmodern}
 \usepackage{titlepic}
@@ -60,6 +60,9 @@
 \usepackage{hyperref} %pour les liens url
 %\usepackage[absolute,overlay]{textpos}
 
+\usepackage{enumitem} % pour gérer l'espacement vertical dans les listes
+
+
 % Pour ne pas que la mention "Chapter" apparaisse à chaque chapitre mais juste le titre du chapitre
 \usepackage{titlesec}
 \titleformat{\chapter}{\normalfont\LARGE}{\thechapter.}{30pt}{\LARGE\bf}
@@ -95,7 +98,7 @@
 %box
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+\SweaveOpts{concordance=TRUE, echo=FALSE}
 \input{Aussant_Forcadell_Sessego-concordance}
 \maketitle
 
@@ -115,10 +118,8 @@ Après une présentation des données et quelques analyses descriptives, nous pr
 \section*{Données et méthode}
 
 <<label = packages_data , echo = F, results = hide, cache = F >>=
-#knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE,
-                      #fig.align = 'center', fig.height = 5, fig.width = 8)
-
-pacman::p_load(data.table, magrittr, ggplot2, ggpubr, kableExtra, smoother, lubridate)
+pacman::p_load(data.table, magrittr, ggplot2, ggpubr, kableExtra, 
+               smoother, lubridate, modelsummary, lfe)
 theme_set(theme_minimal())
 year_colours <- viridis::magma(2, begin = 0.3, end = 0.7)
 
@@ -137,7 +138,13 @@ Nous considérons ici les décès d'individus âgés de 18 à 29 ans (age révol
 
 Nous raisonnerons ici par nombre de décès bruts, et non par taux de mortalité, car cela nécessiterait de rapporter ces décès brut à la taille de la population des jeunes adultes sur chaque période. En effet, d’après l’INSEE, de 2014 à 2020, la population des 18-29 ans a évolué de 9,4 millions à 9,3 millions (INSEE, 2022), une variation de l’ordre de 0,1\%, que l'on peut considérer comme négligeable. De plus, le raisonnement en nombre de décès permet de conserver un ordre de grandeur familier et directement interprétable par les non-démographes. \\ % Enfin, cette évolution tend vers une légère diminution du nombre de jeunes de 18 à 29 ans, ce qui tendrait à diminuer le nombre de décès
 
-Les périodes de confinement que nous considérons sont les suivantes : ...
+Nous considérons par la suite les périodes de confinements suivantes : 
+\begin{itemize}[nosep]
+\item Avant confinement : 1er janvier - 16 mars
+\item Premier confinement : 17 mars - 10 mai
+\item Entre-deux-confinements : 11 mai - 29 octobre
+\item Deuxième confinement : 30 octobre - 14 décembre
+\end{itemize}
 
 \subsubsection*{Une faible mortalité absolue des jeunes adultes rendant plus difficile l'identification d'une tendance}
 
@@ -185,13 +192,18 @@ des %>%
 
 @
 
-On peut tout d'abord souligner que ces effectifs journaliers de décès sont faibles, du fait de la faible mortalité des jeunes adultes, ce qui est - dans l'absolu - réjouissant. Cependant, le nombre de décès étant nécessairement un entier, cela implique des variations importantes, rendant difficile l'identification d'une tendance. Or, la DD repose sur le postula qu'il y ait une évolution identique de la variable d'intérêt - ici le nombre de décès des jeunes adultes - dans les deux groupes avant le traitement (2020 avant le confinement et les années précédentes), ce que l'on souhaiterait pouvoir apprécier avant d'estimer les modèles. \\
+On peut tout d'abord souligner que ces effectifs journaliers de décès sont faibles, du fait de la faible mortalité des jeunes adultes, ce qui est - dans l'absolu - réjouissant. La faiblesse de ces effectifs combinée au caractère nécessairement entier du nombre de décès entraîne toutefois des variations importantes, rendant difficile l'identification d'une tendance. Or la DD repose sur le postulat d'une évolution similaire du nombre de décès entre période de pré-traitement et de traitement pour chacune des années ayant précédé l'année 2020, hypothèse que l'on souhaiterait confirmer avant d'estimer les modèles.\\
 
-Les Figures \ref{fig:courbe_2018_2019} et \ref{} cherchent à dégager ces évolutions et les comparer aux tendances pendant les confinements. Les lignes grises sur la Figure 1 représentant les évolutions brutes du nombre de décès par jour pour les années 2018 à 2020 montre à quel point il est difficile d'en dégager les tendances sans une analyse plus poussée. Nous avons donc procédé à un lissage des tendances par l'intermédiaire de la méthode des fenêtres gaussiennes. Chaque point de la courbe lissé est estimé en fonction d'une pondération des fréquences observée de part et d'autre du point, par l'intermédiaire de coefficients estimés par l'intermédiaire d'une fonction gaussienne calculée sur un fenêtre de temps déterminée\footnote{Pour le détail de la méthode voir : \url{https://au.mathworks.com/help/signal/ref/gausswin.html}, les paramètres utilisés ici sont : }. \textit{EEEeuuuh, je n'ai aucune idée si cette phrase a du sens, mais j'ai l'impression de me comprendre}. Ce lissage nous laisse entrevoir une certaine diminution du nombre décès au cours de la période du premier confinement, par rapport aux années 2018 et 2019. Cependant, mais il est difficile d'interpréter les courbes car on peut encore percevoir la très forte volatilité du nombre de décès. Les tendances pré-confinement ne coïncident pas entièrement de 2018 à 2020, avec en particulier une légère augmentation en 2020 juste avant le premier confinement qui pourrait apparaitre comme une surmortalité par rapport aux deux années précédentes. Serait-ce dû à une surmortalité due à la Covid-19? Cela semble très peu probable étant donné que les formes graves de la maladie ont très peu touchées les jeunes adultes. Il semble difficile d'apprécier ici la moindre différence ou convergence car les variations demeurent faibles (en dessous d'un peu moins de deux écart-types). \\
+% On peut tout d'abord souligner que ces effectifs journaliers de décès sont faibles, du fait de la faible mortalité des jeunes adultes, ce qui est - dans l'absolu - réjouissant. Cependant, le nombre de décès étant nécessairement un entier, cela implique des variations importantes, rendant difficile l'identification d'une tendance. Or, la DD repose sur le postula qu'il y ait une évolution identique de la variable d'intérêt - ici le nombre de décès des jeunes adultes - dans les deux groupes avant le traitement (2020 avant le confinement et les années précédentes), ce que l'on souhaiterait pouvoir apprécier avant d'estimer les modèles. \\
+
+Les Figures \ref{fig:courbe_2018_2019} et \ref{fig:courbe_2014_2020} cherchent à dégager ces évolutions et les comparer aux tendances pendant les confinements. Les lignes grises sur la Figure \ref{fig:courbe_2018_2019} représentant les évolutions brutes du nombre de décès par jour pour les années 2018 à 2020 montre à quel point il est difficile d'en dégager les tendances sans une analyse plus poussée. Nous avons ainsi procédé à un lissage de la courbe selon la méthode des fenêtre gaussienne. Cette méthode se rapproche de celle de la moyenne glissante : l'ordonnée de chaque point de la courbe est déterminée à partir de la valeur non lissée correspondante et de celles de ses voisins dans une fenêtre de temps donnée (ici trente jours), les poids de ces valeurs voisines dans le calcul étant attribués selon une distribution gaussienne afin de prendre en compte la distance au point considéré\footnote{Pour le détail de la méthode voir : \url{https://au.mathworks.com/help/signal/ref/gausswin.html}. Les paramètres utilisés ici sont une fenêtre de 30 et un écart type de 12 ($\alpha = 2,5$)}. Ce lissage nous laisse entrevoir une certaine diminution du nombre décès au cours de la période du premier confinement, par rapport aux années 2018 et 2019. Cependant, mais il est difficile d'interpréter les courbes car on peut encore percevoir la très forte volatilité du nombre de décès. Les tendances pré-confinement ne coïncident pas entièrement de 2018 à 2020, avec en particulier une légère augmentation en 2020 juste avant le premier confinement qui pourrait apparaitre comme une surmortalité par rapport aux deux années précédentes. Serait-ce dû à une surmortalité due à la Covid-19? Cela semble très peu probable étant donné que les formes graves de la maladie ont très peu touchées les jeunes adultes. Il semble difficile d'apprécier ici la moindre différence ou convergence car les variations demeurent faibles (en dessous d'un peu moins de deux écart-types). \\
+
+
+% Nous avons donc procédé à un lissage des tendances par l'intermédiaire de la méthode des fenêtres gaussiennes.Chaque point de la courbe lissé est estimé en fonction d'une pondération des fréquences observée de part et d'autre du point, par l'intermédiaire de coefficients estimés par l'intermédiaire d'une fonction gaussienne calculée sur un fenêtre de temps déterminée\footnote{Pour le détail de la méthode voir : \url{https://au.mathworks.com/help/signal/ref/gausswin.html}, les paramètres utilisés ici sont : }. \textit{EEEeuuuh, je n'ai aucune idée si cette phrase a du sens, mais j'ai l'impression de me comprendre}. 
 
 \begin{figure}
 \begin{center}
-<<label = courbe_2018_2019, echo = F, results = hide, cache = F, fig = T, out.width = '25cm', out.height = '15cm'>>=
+<<label = courbe_2018_2019, echo = F, results = hide, cache = F, fig = T, width=8, height=5>>=
 theme_set(theme_minimal())
 
 deces_jours <- fread("Data/deces_jours_2014-2020.csv")[md_dec != "02-29"]
@@ -203,7 +215,10 @@ corresp_numjour <- data.table(md_dec = format(seq(ymd("2018-01-01"),
                               numjour = 1:365)
 deces_jours[corresp_numjour, numjour := i.numjour, on = "md_dec"]
 
-## Lissage Gaussian du nombre de morts par jour sur une fenêtre de 30 jours
+mois <- c("jan.", "fév.", "mars", "avril", "mai", "juin", 
+          "juil.", "août", "sept.", "oct.", "nov.", "déc.")
+
+## Lissage Gaussien du nombre de morts par jour sur une fenêtre de 30 jours
 deces_plot1820 <- deces_jours[ADEC %in% 2018:2020
 ][data.table(date_dec = sort(deces_jours[ADEC %in% 2018:2020]$date_dec),
              smooth_dec = smth.gaussian(deces_jours[ADEC %in% 2018:2020
@@ -240,17 +255,29 @@ ggplot(deces_plot1820) +
                 group = ADEC,
                 colour = factor(ADEC))) +
   ylim(0,23) +
+  scale_x_continuous(breaks = deces_plot1820[format(date_dec, "%d") == "01", 
+                                             unique(numjour)],
+                     minor_breaks = deces_plot1820[format(date_dec, "%d") == "15", 
+                                                   unique(numjour)],
+                     labels = mois) +
   scale_colour_viridis_d("Année", end = 0.8, option = "F") +
-  labs(y = "Nombre de morts", x = "Jour",
+  labs(y = "Nombre de décès", x = "Jours",
        title = "",
-       caption = "Source : INSEE, 2018-2020 \n
-       Champ : Décès de personnes agées de 18 à 29 ans survenus en France métropolitaine de 2014 à 2020 (en enlevant le 29 février 2016 et 2020.")
+       caption = paste(collapse = "\n",
+                       c("Source : INSEE, 2018-2020",
+                         "Champ : Décès de personnes agées de 18 à 29 ans survenus en France métropolitaine de 2014 à 2020 (sauf 29 février 2016 et 2020).",
+                         "Note : pour plus de lisibilité le nombre de décès journalier est lissé sur une fenêtre de 30 jours selon un lissage gaussien. Sur l'axe des\nabscisses les noms sont inscrits au niveau du premier jour du mois. Les zones grisées correspondent aux périodes de premier et\ndeuxième confinement (respectivement du 17 mars au 10 mai et du 30 octobre au 14 décembre)."))) +
+  theme(plot.caption = element_text(hjust = 0),
+        plot.margin = margin(0.01,0.01,0.01,0.01, "cm"))
 
-
+       
 
 @
 \end{center}
+\caption{Nombre de décès journaliers chez les 18-29 ans en 2018, 2019, et 2020}
+\label{fig:courbe_2018_2019}
 \end{figure}
+
 
 \begin{figure}
 \begin{center}
@@ -276,10 +303,18 @@ rbind(deces_jours[ADEC %in% 2014:2019,
   geom_line(aes(y = ci_high, x = MDEC, group = ADEC), 
             linetype = "dashed", colour = "orange") +
   scale_colour_manual("Années", values = c("orange", "cornflowerblue")) +
-  scale_x_continuous(breaks = 1:12) +
-  labs(x = "Mois", y = "Nombre de morts")
+  scale_x_continuous(breaks = 1:12, labels = mois) +
+  labs(x = "Mois", y = "Nombre de décès",
+       caption = paste(c("Source : INSEE, 2014-2020.",
+                         "Champ : Décès de personnes agées de 18 à 29 ans survenus en France métropolitaine de 2014 à 2020 (sauf 29 février 2016 et 2020).",
+                         "Note : la zone colorée de part et d'autre de la courbe correspond à 1,96 fois l'écart type du nombre de décès mensuel moyen sur les\nannées 2014 à 2019."), 
+                       collapse = "\n")) +
+  theme(plot.caption = element_text(hjust = 0),
+        plot.margin = margin(0,0,0,0, "cm"))
 @
 \end{center}
+\caption{Nombre de décès mensuels chez les 18-29 ans entre 2014 et 2020}
+\label{fig:courbe_2014_2020}
 \end{figure}
 
 % Ne pas oublier de mentionner quelque part que l'on supprime le 29 février de l'analyse
@@ -291,19 +326,479 @@ L'on retrouve ici des résultats démontrés dans la littérature : deux pics an
 Cependant, en comparant l'évolution du nombre de décès entre mai et septembre pour l'année 2020 par rapport aux années 2014 à 2019, on peut se demander si le confinement ne pourrait pas avoir eu l'effet inverse que celui attendu après la fin des restrictions. En effet, on observe dans la Figure 2, tout comme dans la Figure 3, une augmentation du nombre de décès de mai à août. On peut en effet supposer que les restrictions imposées lors du confinement, bien qu'elles aient pu avoir un effet protecteur pour les jeunes adultes lors du confinement, ont pu occasionner un effet rebond au cours de la période estivale qui a suivi, où l'intensité des activités à repris de plus belles pour compenser les restrictions des mois précédents. Ainsi, si le confinement a permis de sauver des vies, le même nombre de vie n'a-t-il pas été perdu au court de l'été qui a suivi ? Quel effet du confinement sur le long terme ? \\
 
 \textit{Je n'arrive pas à changer la taille des figures... Je ne sais pas pourquoi, mais je pense que ça devrait être réglable, pour les faire rentrer sur toute la largeur de la page}
-
+\textit{Je n'ai pas réussi non plus, mais j'ai fait de mon mieux pour les étirer un peu horizontalement.}
 
 
 \section*{Modèles et résultats}
 
-\subsubsection*{Les modèles de régressions choisies}
+<<label = rec-reg, results=hide>>=
+deces_jours[, periode := factor(periode)]
+deces_jours[, periode_bis := fifelse(periode %in% 2:3, "2-3", 
+                                     as.character(periode))]
+deces_jours[, weekend := factor(weekend)]
+deces_jours[, numjour := format(date_dec, "%j")]
 
-Nous chercherons à répondre à ces questions par l'intermédiaire des modèles suivants.
+## Variables dichotomique pour chaque année
+lapply(2014:2020, function(an) {
+  deces_jours[, paste0("dicho_", an) := factor(fifelse(ADEC == an, 1, 0))]})
 
+## Variable dichotomique pour chaque période
+lapply(1:4, function(per) {
+  deces_jours[, paste0("periode", per) := factor(fifelse(periode == per, 1, 0))]})
+
+deces_jours[, periode23 := factor(fifelse(periode_bis == "2-3", 1, 0))]
+
+## Labels pour mise en page tableaux
+reglabs <- c("(Intercept)" = "Intercept",
+             "weekend1" = "Week-end",
+             "Num.Obs." = "Observations",
+             "R2" = "R2", 
+             "R2 Adj." = "R2 ajusté",
+             setNames(c(2015:2020), 
+                      paste0("dicho_", 2015:2020, "1")),
+             setNames(c("17 mars - 10 mai", 
+                        "17 mars - 29 oct", 
+                        "30 oct - 14 déc"), 
+                      paste0("periode", c(2, 23, 4), "1")),
+             setNames(paste("2020 ×", c("17 mars - 10 mai", 
+                                        "17 mars - 29 oct", 
+                                        "30 oct - 14 déc")),
+                      paste("dicho_20201 ×", 
+                             paste0("periode", c(2, 23, 4), "1"))),
+             setNames(paste(c(rep(c("1 jan - 16 mars"), 3),
+                              "17 mars - 10 mai", 
+                              "17 mars - 29 oct", 
+                              "30 oct - 14 déc"), "× week-end"), 
+                      paste(paste0("periode", c(2, 23, 4), 
+                                   rep(0:1, each = 3)), 
+                            "× weekend1")),
+             setNames(paste("2020 ×", 
+                            c(rep(c("1 jan - 16 mars"), 3),
+                              "17 mars - 10 mai", 
+                              "17 mars - 29 oct", 
+                              "30 oct - 14 déc"),
+                            "× week-end"),
+                      paste("dicho_20201 ×", 
+                            paste(paste0("periode", c(2, 23, 4), 
+                                   rep(0:1, each = 3)),
+                            "× weekend1"))))
+@
+
+%\subsubsection*{Les modèles de régressions choisies}
+
+Nous tentons de répondre à ces questions à l'aide de différents modèles. Tous cherchent à expliquer le nombre de décès journaliers chez les 18-29 ans en fonction de l'année - 2020 représentant notre groupe « traité », les années précédentes le groupe de contrôle - et de la période considérée - le premier et le deuxième confinement représentant nos périodes de « traitement », les premiers jours de l'année notre période « pré-traitement ». Notre modèle le plus simple s'exprime ainsi de la manière suivante : 
+
+\begin{equation}
+\mathrm{Décès}_{it} = \beta_0 + \beta_1 \mathrm{Année}_i + \beta_2 \mathrm{Période}_t + \beta_3 (\mathrm{Année}_i \times \mathrm{Période}_t) + \epsilon_{it}
+\end{equation}
+
+où l'indice $i$ renvoie à une année et $t$ à une période. En pratique, le coefficient qui nous intéresse est celui de l'interaction entre l'indicatrice de l'année 2020 et celle de la période de confinement considérée, autrement dit l'estimateur de DD. Dans le contexte de notre étude, cet estimateur correspond à la différence entre le nombre de décès journaliers attendus en 2020 pendant les périodes de confinement et le nombre réellement observé. 
+
+Plusieurs ajouts permettent de s'assurer de la robustesse de ce premier modèle et d'améliorer son ajustement. Une première étape consiste à prendre en compte une « effet week-end », selon l'hypothèse que la mortalité des jeunes n'est pas la même - en nombre ou en nature - en début et en fin de semaine.
+
+\begin{equation}
+\begin{aligned}
+  \textrm{Décès}_{it} = \beta_0 &+ \beta_1 \textrm{Année}_i + \beta_2 \textrm{Période}_t + \beta_3 (\textrm{Année}_i \times \textrm{Période}_t)\\
+   &+ \beta_4 \textrm{Week-end} + \epsilon_{it}
+\end{aligned}
+\end{equation}
+
+Si la variable indicatrice de week-end peut améliorer l'ajustement de notre modèle, l'ajout d'une interaction de troisième ordre entre année, période, et week-end permet d'affiner notre compréhension de l'effet du confinement sur la mortalité des jeunes. On peut en effet supposer que les décès juvéniles liés au sorties et comportements à risques sont en temps normal plus fréquents le week-end, et auraient ainsi d'autant plus diminué pendant les week-ends confinés. L'estimateur de DD devient alors plus complexe, puisqu'il se dédouble en une différence dans le nombre de décès attendus et observés en semaine d'une part, pendant le week-end d'autre part, soit les coefficients $\beta_3$ et $\beta_6$ dans le modèle suivant :
+
+\begin{equation}
+\begin{aligned}
+  \textrm{Décès}_{it} = \beta_0 &+ \beta_1 \textrm{Année}_i + \beta_2 \textrm{Période}_t + \beta_3 (\textrm{Année}_i \times \textrm{Période}_t)\\
+   &+ \beta_4 \textrm{Week-end} + \beta_5 (\textrm{Période}_i \times \textrm{Week-end}_t)\\
+   &+ \beta_6 (\textrm{Année}_i \times \textrm{Période}_t \times \textrm{Week-end}_t) + \epsilon_{it}
+\end{aligned}
+\end{equation}
+
+Enfin nos deux derniers modèles reprennent les modèles précédents en leur ajoutant des effets fixes journaliers. Cette ajout vise à contrôler la saisonnalité de la mortalité de manière plus précise que ne peut le faire la variable de période. On considère ainsi les modèles suivant :
+
+
+\begin{equation}
+\begin{aligned}
+  \textrm{Décès}_{ijt} = \beta_0 &+ \beta_1 \textrm{Année}_i + \beta_2 \textrm{Période}_t + \beta_3 (\textrm{Année}_i \times \textrm{Période}_t) \\
+  &+ \alpha_j + \epsilon_{it}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+  \textrm{Décès}_{it} = \beta_0 &+ \beta_1 \textrm{Année}_i + \beta_2 \textrm{Période}_t + \beta_3 (\textrm{Année}_i \times \textrm{Période}_t)\\
+   &+ \beta_4 \textrm{Week-end} + \beta_5 (\textrm{Période}_i \times \textrm{Week-end}_t)\\
+   &+ \beta_6 (\textrm{Année}_i \times \textrm{Période}_t \times \textrm{Week-end}_t) + \alpha_j + \epsilon_{it}
+\end{aligned}
+\end{equation}
+
+où l'indice $j$ correspond au jour de l'année, et $\alpha_j$ aux effets fixes propre à chaque jour. Par souci de cohérence les 29 février des années bissextiles 2016 et 2020 ne sont pas pris en compte dans les modèles.
+
+Dans la mesure où le nombre décès journaliers pour les années 2014 à 2017 ont été imputé à partir du nombre de décès mensuels, nous présentons séparément les régressions effectuées sur les années 2018-2020 puis sur l'ensemble des années 2014 à 2020. Pour les mêmes raisons, les régressions prenant en compte une effet « week-end » n'auraient pas eu de sens pour les années 2014 à 2017 et n'ont dont pas été réalisés. Par ailleurs, l'imputation du nombre de décès journaliers entraîne une réduction artificielle de la variance des données pour ces années. Les régressions portant sur l'ensemble des années 2014 à 2020 ont ainsi avant tout pour objet de confirmer la robustesse des coefficients observés pour les années 2018 à 2020. Enfin, l'ajout d'effets fixes au régressions portant sur la période du deuxième confinement n'a pas été techniquement possible, l'information contenue dans les données étant peut-être insuffisante pour estimer ces modèles.
+
+
+\subsubsection*{Une réduction importante de la mortalité juvénile pendant le premier confinement}
+
+Tableau \ref{tab:reg-conf1} :
+\begin{itemize}
+\item entre 1 et 4 décès « sauvés » par jour pendant le premier confinement
+\item coefficients très proches quand on prend en compte 2014-2020
+\item avant 2020, nombre de décès plus élevé le week-end, et encore plus pendant la période du confinement (17 mars - 10 mai, probablement un effet saisonnier, n'est plus significatif quand on ajoute les effets fixes par jour ?)
+\item l'interaction d'ordre trois montre que c'est davantage des décès de week-end qui ont été évités pendant le confinement, ce qui va dans le sens d'une réduction des activités à risques en dehors du domicile chez les jeunes
+\end{itemize}
+
+Mais : la Figure \ref{fig:courbe_2014_2020} laisse penser qu'un pic de mortalité post-confinement serait venu « compenser » le nombre de décès évités pendant le confinement. Pour tester cette hypothèse nous reprenons les mêmes modèles en considérant cette fois ensemble le premier confinement et la période d'entre-deux-confinements comme période de traitement.\\
+
+
+Tableau \ref{tab:reg-per23} :
+\begin{itemize}
+\item les tendances sont les mêmes : moins de morts pendant le confinement qu'à la même période les années précédentes, en particulier le week-end
+\item mais les écarts entre les nombres de décès attendus et observés sont moins importants
+\end{itemize}
+
+\begin{landscape}
+<<label=reg-conf1, results=tex>>=
+reg1820_conf1 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                        periode2 + dicho_2020:periode2,
+                      data = deces_jours[periode %in% 1:2 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_conf1_we <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                                periode2 + dicho_2020:periode2 + weekend,
+                      data = deces_jours[periode %in% 1:2 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_conf1_intwe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                              periode2 + dicho_2020:periode2 + weekend + 
+                              periode2:weekend + dicho_2020:periode2:weekend,
+                            data = deces_jours[periode %in% 1:2 & 
+                                                 ADEC %in% 2018:2020])
+
+reg1820_conf1_fe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                           periode2 + dicho_2020:periode2|
+                           numjour|0|0,
+                          data = deces_jours[periode %in% 1:2 & 
+                                               ADEC %in% 2018:2020])
+
+reg1820_conf1_fe_intwe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                              periode2 + dicho_2020:periode2 + weekend + 
+                              periode2:weekend + dicho_2020:periode2:weekend|
+                              numjour|0|0,
+                            data = deces_jours[periode %in% 1:2 & 
+                                                 ADEC %in% 2018:2020])
+
+
+reg1420_conf1 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                        dicho_2018 + dicho_2019 + dicho_2020 + 
+                        periode2 + dicho_2020:periode2,
+                      data = deces_jours[periode %in% 1:2 & 
+                                           ADEC %in% 2014:2020])
+
+reg1420_conf1_fe <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                           dicho_2018 + dicho_2019 + dicho_2020 + 
+                           periode2 + dicho_2020:periode2|
+                           numjour|0|0,
+                         data = deces_jours[periode %in% 1:2 & 
+                                              ADEC %in% 2014:2020])
+
+
+tab <- modelsummary(list(reg1820_conf1, 
+                         reg1820_conf1_we,
+                         reg1820_conf1_intwe, 
+                         reg1820_conf1_fe,
+                         reg1820_conf1_fe_intwe,
+                         reg1420_conf1, 
+                         reg1420_conf1_fe),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:10)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", "(1)", "(2)", "(3)", "(4)", "(5)", "(1)", "(4)")
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      label = "reg-conf1",
+      caption = "Effet du premier confinement sur le nombre de décès journaliers des 18-29 ans", 
+      linesep = "",
+      align = c("l", rep("c", ncol(tab)-1))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position",
+                                  "scale_down"),
+                font_size = 10) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  row_spec(17:18, bold=TRUE) %>%
+  add_header_above(c("", "2018-2020" = 5, "2014-2020" = 2),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 10 mai.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+@
+\end{landscape}
+
+\begin{landscape}
+<<label=reg-per23, results=tex>>=
+reg1820_per23 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                        periode23 + dicho_2020:periode23,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_per23_we <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                                periode23 + dicho_2020:periode23 + weekend,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_per23_intwe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                              periode23 + dicho_2020:periode23 + weekend + 
+                              periode23:weekend + dicho_2020:periode23:weekend,
+                            data = deces_jours[periode %in% 1:3 & 
+                                                 ADEC %in% 2018:2020])
+
+reg1820_per23_fe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                           periode23 + dicho_2020:periode23 + 
+                           weekend|numjour|0|0,
+                          data = deces_jours[periode %in% 1:3 & 
+                                               ADEC %in% 2018:2020])
+
+reg1820_per23_fe_intwe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                              periode23 + dicho_2020:periode23 + weekend + 
+                              periode23:weekend + dicho_2020:periode23:weekend|
+                              numjour|0|0,
+                            data = deces_jours[periode %in% 1:3 & 
+                                                 ADEC %in% 2018:2020])
+
+
+reg1420_per23 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                        dicho_2018 + dicho_2019 + dicho_2020 + 
+                        periode23 + dicho_2020:periode23,
+                      data = deces_jours[periode %in% 1:3 & 
+                                           ADEC %in% 2014:2020])
+
+reg1420_per23_fe <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                           dicho_2018 + dicho_2019 + dicho_2020 + 
+                           periode23 + dicho_2020:periode23|
+                           numjour|0|0,
+                         data = deces_jours[periode %in% 1:3 & 
+                                              ADEC %in% 2014:2020])
+
+tab <- modelsummary(list(reg1820_per23, 
+                         reg1820_per23_we,
+                         reg1820_per23_intwe,
+                         reg1820_per23_fe,
+                         reg1820_per23_fe_intwe,
+                         reg1420_per23, 
+                         reg1420_per23_fe),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:10)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", "(1)", "(2)", "(3)", "(4)", "(5)", "(1)", "(4)")
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      label = "reg-per23",
+      caption = "Effet du premier confinement et de la période d'entre-deux-confinements sur le nombre de décès journaliers des 18-29 ans", 
+      linesep = "",
+      align = c("l", rep("c", ncol(tab)-1))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position", 
+                                  "scale_down"),
+                font_size = 10) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  row_spec(17:18, bold=TRUE) %>%
+  add_header_above(c("", "2018-2020" = 5, "2014-2020" = 2),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 29 octobre.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+@
+\end{landscape}
+
+\subsubsection*{Un deuxième confinement moins restrictif ?}
+
+Tableau \ref{tab:reg-conf2} : effet incertain, coefficients proches de zéro et variables selon les années considérées, plus ou moins significatif.
+
+\subsubsection*{Moins de décès chez les jeunes hommes pendant les week-end du confinement}
+
+Tableau \ref{tab:reg-sexe} :
+\begin{itemize}
+\item En nombre, plus de décès évités chez les hommes que chez les femmes
+\item Apparemment pas d'effet de week-end chez les femmes (confinement ou pas), alors qu'il est particulièrement marqué chez les hommes (alors même qu'on regarde les modèles à effets fixes ?)
+\item Discuter la question du nombre vs du pourcentage de décès évités : la mortalité des femmes est beaucoup plus faible que celles des hommes en général, si on raisonne en termes relatifs c'est finalement chez elles que la mortalité à l'air d'avoir été la plus réduite pendant le confinement
+\item Globalement peu de décès et beaucoup de variations, donc par évident de tirer des conclusions certaines
+\end{itemize}
+
+\begin{landscape}
+<<label=reg-conf2, results=tex>>=
+reg1820_conf2 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                        periode4 + dicho_2020:periode4,
+                      data = deces_jours[periode %in% c(1,4) & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_conf2_we <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                           periode4 + dicho_2020:periode4 + weekend,
+                         data = deces_jours[periode %in% c(1,4) & 
+                                              ADEC %in% 2018:2020])
+
+reg1820_conf2_intwe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                              periode4 + dicho_2020:periode4 + weekend +
+                              weekend + weekend:periode4 +
+                              dicho_2020:weekend:periode4,
+                            data = deces_jours[periode %in% c(1,4) & 
+                                                 ADEC %in% 2018:2020])
+
+
+reg1420_conf2 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                        dicho_2018 + dicho_2019 + dicho_2020 + 
+                        periode4 + dicho_2020:periode4,
+                      data = deces_jours[periode %in% c(1,4) & 
+                                           ADEC %in% 2014:2020])
+
+
+tab <- modelsummary(list(reg1820_conf2,
+                         reg1820_conf2_we,
+                         reg1820_conf2_intwe,
+                         reg1420_conf2),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:7)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", "(1)", "(2)", "(3)", "(1)")
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      label = "reg-conf2",
+      caption = "Effet du deuxième confinement sur le nombre de décès journaliers des 18-29 ans", 
+      linesep = "",
+      align = c("l", rep("c", ncol(tab)-1))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position"),
+                font_size = 10) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  row_spec(17:18, bold=TRUE) %>%
+  add_header_above(c("", "2018-2020" = 3, "2014-2020" = 1),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 16 mars et du 30 octobre au 14 décembre.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+@
+\end{landscape}
+
+
+\begin{landscape}
+<<label=reg-sexe, results=tex>>=
+regfem1820_conf1_fe <- felm(ndec_fem ~ dicho_2019 + dicho_2020 + periode2 + 
+                              dicho_2020:periode2|
+                              numjour|0|0,
+                         data = deces_jours[periode %in% c(1,2) & 
+                                              ADEC %in% 2018:2020])
+
+regfem1820_conf1_fe_intwe <- felm(ndec_fem ~ dicho_2019 + dicho_2020 + 
+                              periode2 + dicho_2020:periode2 + weekend +
+                              periode2:weekend + dicho_2020:periode2:weekend|
+                              numjour|0|0,
+                            data = deces_jours[periode %in% 1:2 & 
+                                                 ADEC %in% 2018:2020])
+
+regfem1420_conf1_fe <- felm(ndec_fem ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                              dicho_2018 + dicho_2019 + dicho_2020 + 
+                              periode2 + dicho_2020*periode2|
+                              numjour|0|0,
+                         data = deces_jours[periode %in% c(1,2) & 
+                                              ADEC %in% 2014:2020])
+
+reghom1820_conf1_fe <- felm(ndec_hom ~ dicho_2019 + dicho_2020 + periode2 + 
+                              dicho_2020:periode2|
+                              numjour|0|0,
+                            data = deces_jours[periode %in% c(1,2) & 
+                                                 ADEC %in% 2018:2020])
+
+reghom1820_conf1_fe_intwe <- felm(ndec_hom ~ dicho_2019 + dicho_2020 + 
+                                    periode2 + dicho_2020:periode2 + weekend +
+                                    periode2:weekend + dicho_2020:periode2:weekend|
+                                    numjour|0|0,
+                                  data = deces_jours[periode %in% 1:2 & 
+                                                       ADEC %in% 2018:2020])
+
+reghom1420_conf1_fe <- felm(ndec_hom ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                              dicho_2018 + dicho_2019 + dicho_2020 + 
+                              periode2 + dicho_2020*periode2|
+                              numjour|0|0,
+                         data = deces_jours[periode %in% c(1,2) & 
+                                              ADEC %in% 2014:2020])
+
+tab <- modelsummary(list(regfem1820_conf1_fe, 
+                         regfem1820_conf1_fe_intwe,
+                         regfem1420_conf1_fe,
+                         reghom1820_conf1_fe, 
+                         reghom1820_conf1_fe_intwe,
+                         reghom1420_conf1_fe),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:9)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", rep(c("(4)", "(5)", "(4)"), 2))
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      label = "reg-sexe",
+      caption = "Effet différencié du premier confinement sur le nombre de décès journaliers des 18-29 ans chez les femmes et chez les hommes", 
+      linesep = "",
+      align = c("l", rep("c", ncol(tab)-1))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position", 
+                                  "scale_down"),
+                font_size = 10) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(7:8, bold=TRUE) %>%
+  row_spec(15:16, bold=TRUE) %>%
+  add_header_above(c("", rep(c("2018-2019" = 2, 
+                               "2014-2019" = 1),2)),
+                   bold = F, line = T) %>%
+    add_header_above(c("", "Femmes" = 3, "Hommes" = 3),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 10 mai.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+@
+
+\end{landscape}
 
 \section*{Conclusion (et Discussion?)}
 
-
+\begin{itemize}
+\item On aurait aimé avoir des données plus précises pour plusieurs années avant 2020, pour pouvoir identifier des tendances avec plus de précision.
+\item On aurait aimé avoir plus d'information sur les décès (cause, lieu) et les personnes décédées (origine sociale et profession notamment, parce que les comportements à risques ne sont pas les mêmes chez tous les jeunes, et que certaines professions ont été moins confinées que d'autres).
+\end{itemize}
 
 
 
