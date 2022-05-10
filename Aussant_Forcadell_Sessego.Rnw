@@ -325,7 +325,7 @@ L'on retrouve ici des résultats démontrés dans la littérature : deux pics an
 
 Cependant, en comparant l'évolution du nombre de décès entre mai et septembre pour l'année 2020 par rapport aux années 2014 à 2019, on peut se demander si le confinement ne pourrait pas avoir eu l'effet inverse que celui attendu après la fin des restrictions. En effet, on observe dans la Figure 2, tout comme dans la Figure 3, une augmentation du nombre de décès de mai à août. On peut en effet supposer que les restrictions imposées lors du confinement, bien qu'elles aient pu avoir un effet protecteur pour les jeunes adultes lors du confinement, ont pu occasionner un effet rebond au cours de la période estivale qui a suivi, où l'intensité des activités à repris de plus belles pour compenser les restrictions des mois précédents. Ainsi, si le confinement a permis de sauver des vies, le même nombre de vie n'a-t-il pas été perdu au court de l'été qui a suivi ? Quel effet du confinement sur le long terme ? \\
 
-\textit{Je n'arrive pas à changer la taille des figures... Je ne sais pas pourquoi, mais je pense que ça devrait être réglable, pour les faire rentrer sur toute la largeur de la page}
+\textit{Je n'arrive pas à changer la taille des figures... Je ne sais pas pourquoi, mais je pense que ça devrait être réglable, pour les faire rentrer sur toute la largeur de la page}\\
 \textit{Je n'ai pas réussi non plus, mais j'ai fait de mon mieux pour les étirer un peu horizontalement.}
 
 
@@ -358,29 +358,33 @@ reglabs <- c("(Intercept)" = "Intercept",
                       paste0("dicho_", 2015:2020, "1")),
              setNames(c("17 mars - 10 mai", 
                         "17 mars - 29 oct", 
+                        "11 mai - 29 oct",
                         "30 oct - 14 déc"), 
-                      paste0("periode", c(2, 23, 4), "1")),
+                      paste0("periode", c(2, 23, 3, 4), "1")),
              setNames(paste("2020 ×", c("17 mars - 10 mai", 
                                         "17 mars - 29 oct", 
+                                        "11 mai - 29 oct",
                                         "30 oct - 14 déc")),
                       paste("dicho_20201 ×", 
-                             paste0("periode", c(2, 23, 4), "1"))),
-             setNames(paste(c(rep(c("1 jan - 16 mars"), 3),
+                             paste0("periode", c(2, 23, 3, 4), "1"))),
+             setNames(paste(c(rep(c("1 jan - 16 mars"), 4),
                               "17 mars - 10 mai", 
                               "17 mars - 29 oct", 
+                              "11 mai - 29 oct",
                               "30 oct - 14 déc"), "× week-end"), 
-                      paste(paste0("periode", c(2, 23, 4), 
-                                   rep(0:1, each = 3)), 
+                      paste(paste0("periode", c(2, 23, 3, 4), 
+                                   rep(0:1, each = 4)), 
                             "× weekend1")),
              setNames(paste("2020 ×", 
-                            c(rep(c("1 jan - 16 mars"), 3),
+                            c(rep(c("1 jan - 16 mars"), 4),
                               "17 mars - 10 mai", 
                               "17 mars - 29 oct", 
+                              "11 mai - 29 oct",
                               "30 oct - 14 déc"),
                             "× week-end"),
                       paste("dicho_20201 ×", 
-                            paste(paste0("periode", c(2, 23, 4), 
-                                   rep(0:1, each = 3)),
+                            paste(paste0("periode", c(2, 23, 3, 4), 
+                                   rep(0:1, each = 4)),
                             "× weekend1"))))
 @
 
@@ -413,8 +417,7 @@ Si la variable indicatrice de week-end peut améliorer l'ajustement de notre mod
 \end{aligned}
 \end{equation}
 
-Enfin nos deux derniers modèles reprennent les modèles précédents en leur ajoutant des effets fixes journaliers. Cette ajout vise à contrôler la saisonnalité de la mortalité de manière plus précise que ne peut le faire la variable de période. On considère ainsi les modèles suivant :
-
+Enfin nos deux derniers modèles reprennent les modèles précédents en leur ajoutant des effets fixes journaliers. Cet ajout vise à contrôler la saisonnalité de la mortalité de manière plus précise que ne peut le faire la variable de période. On considère ainsi les modèles suivant :
 
 \begin{equation}
 \begin{aligned}
@@ -431,9 +434,9 @@ Enfin nos deux derniers modèles reprennent les modèles précédents en leur aj
 \end{aligned}
 \end{equation}
 
-où l'indice $j$ correspond au jour de l'année, et $\alpha_j$ aux effets fixes propre à chaque jour. Par souci de cohérence les 29 février des années bissextiles 2016 et 2020 ne sont pas pris en compte dans les modèles.
+où l'indice $j$ correspond au jour de l'année, et $\alpha_j$ aux effets fixes propres à chaque jour. Par souci de cohérence les 29 février des années bissextiles 2016 et 2020 ne sont pas pris en compte dans les modèles.
 
-Dans la mesure où le nombre décès journaliers pour les années 2014 à 2017 ont été imputé à partir du nombre de décès mensuels, nous présentons séparément les régressions effectuées sur les années 2018-2020 puis sur l'ensemble des années 2014 à 2020. Pour les mêmes raisons, les régressions prenant en compte une effet « week-end » n'auraient pas eu de sens pour les années 2014 à 2017 et n'ont dont pas été réalisés. Par ailleurs, l'imputation du nombre de décès journaliers entraîne une réduction artificielle de la variance des données pour ces années. Les régressions portant sur l'ensemble des années 2014 à 2020 ont ainsi avant tout pour objet de confirmer la robustesse des coefficients observés pour les années 2018 à 2020. Enfin, l'ajout d'effets fixes au régressions portant sur la période du deuxième confinement n'a pas été techniquement possible, l'information contenue dans les données étant peut-être insuffisante pour estimer ces modèles.
+Dans la mesure où le nombre décès journaliers pour les années 2014 à 2017 ont été imputé à partir du nombre de décès mensuels, nous présentons séparément les régressions effectuées sur les années 2018-2020 puis sur l'ensemble des années 2014 à 2020. Pour les mêmes raisons, les régressions prenant en compte une effet « week-end » n'auraient pas eu de sens pour les années 2014 à 2017 et n'ont dont pas été réalisés. Le modèle 6 correspondant ainsi au modèle 4 sans effet weekend. On y a également substitué les effets fixes journaliers par des effets fixes mensuels, afin de s'adapter au niveau de précision des données disponibles. Par ailleurs, l'imputation du nombre de décès journaliers entraîne une réduction artificielle de la variance des données pour ces années. Les régressions portant sur l'ensemble des années 2014 à 2020 ont ainsi avant tout pour objet de confirmer la robustesse des coefficients observés pour les années 2018 à 2020. Enfin, l'ajout d'effets fixes au régressions portant sur la période du deuxième confinement n'a pas été techniquement possible, l'information contenue dans les données étant peut-être insuffisante pour estimer ces modèles.
 
 
 \subsubsection*{Une réduction importante de la mortalité juvénile pendant le premier confinement}
@@ -496,7 +499,7 @@ reg1420_conf1 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 +
 reg1420_conf1_fe <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
                            dicho_2018 + dicho_2019 + dicho_2020 + 
                            periode2 + dicho_2020:periode2|
-                           numjour|0|0,
+                           MDEC|0|0,
                          data = deces_jours[periode %in% 1:2 & 
                                               ADEC %in% 2014:2020])
 
@@ -517,7 +520,7 @@ tab <- modelsummary(list(reg1820_conf1,
 
 tab$term <- reglabs[tab$term]
 tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
-names(tab) <- c(" ", "(1)", "(2)", "(3)", "(4)", "(5)", "(1)", "(4)")
+names(tab) <- c(" ", "(1)", "(2)", "(3)", "(4)", "(5)", "(1)", "(6)")
 
 tab %>% 
   kbl(longtable = F, booktabs = T,
@@ -583,7 +586,7 @@ reg1420_per23 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 +
 reg1420_per23_fe <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
                            dicho_2018 + dicho_2019 + dicho_2020 + 
                            periode23 + dicho_2020:periode23|
-                           numjour|0|0,
+                           MDEC|0|0,
                          data = deces_jours[periode %in% 1:3 & 
                                               ADEC %in% 2014:2020])
 
@@ -603,7 +606,7 @@ tab <- modelsummary(list(reg1820_per23,
 
 tab$term <- reglabs[tab$term]
 tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
-names(tab) <- c(" ", "(1)", "(2)", "(3)", "(4)", "(5)", "(1)", "(4)")
+names(tab) <- c(" ", "(1)", "(2)", "(3)", "(4)", "(5)", "(1)", "(6)")
 
 tab %>% 
   kbl(longtable = F, booktabs = T,
@@ -627,6 +630,71 @@ tab %>%
            general_title = "", threeparttable = T)
 @
 \end{landscape}
+
+\begin{landscape}
+<<label=reg-per3, results=tex>>=
+reg1820_per3 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                        periode3 + dicho_2020:periode3,
+                      data = deces_jours[periode %in% c(1,3) & 
+                                           ADEC %in% 2018:2020])
+
+reg1820_per3_we <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                           periode3 + dicho_2020:periode3 + weekend,
+                         data = deces_jours[periode %in% c(1,3) & 
+                                              ADEC %in% 2018:2020])
+
+reg1820_per3_intwe <- felm(ndec ~ dicho_2019 + dicho_2020 + 
+                              periode3 + dicho_2020:periode3 + weekend +
+                              weekend + weekend:periode3 +
+                              dicho_2020:weekend:periode3,
+                            data = deces_jours[periode %in% c(1,3) & 
+                                                 ADEC %in% 2018:2020])
+
+
+reg1420_per3 <- felm(ndec ~ dicho_2015 + dicho_2016 + dicho_2017 + 
+                        dicho_2018 + dicho_2019 + dicho_2020 + 
+                        periode3 + dicho_2020:periode3,
+                      data = deces_jours[periode %in% c(1,3) & 
+                                           ADEC %in% 2014:2020])
+
+
+tab <- modelsummary(list(reg1820_per3,
+                         reg1820_per3_we,
+                         reg1820_per3_intwe,
+                         reg1420_per3),
+                    output = "data.frame",
+                    #vcov = sandwich::vcovHC,
+                    estimate = "{estimate}{stars}",
+                    statistic = "({conf.low} ; {conf.high})",
+                    fmt = function(x) round(x, 2),
+                    stars = c('*' = .1, "**" = .05, "***" = .01))[c(2,4:7)]
+
+tab$term <- reglabs[tab$term]
+tab[seq(2, (nrow(tab)-3), 2),]$term <- ""
+names(tab) <- c(" ", "(1)", "(2)", "(3)", "(1)")
+
+tab %>% 
+  kbl(longtable = F, booktabs = T,
+      escape = F, format = "latex",
+      label = "reg-per3",
+      caption = "Effet de l'entre-deux-confinements sur le nombre de décès journaliers des 18-29 ans", 
+      linesep = "",
+      align = c("l", rep("c", ncol(tab)-1))) %>% 
+  kable_styling(position ="center", 
+                latex_options = c("HOLD_position"),
+                font_size = 10) %>%
+  #column_spec(column = 2, bold = T) %>%
+  row_spec(9:10, bold=TRUE) %>%
+  row_spec(17:18, bold=TRUE) %>%
+  add_header_above(c("", "2018-2020" = 3, "2014-2020" = 1),
+                   bold = T) %>%
+  footnote(general = c("Source : INSEE, 2014 à 2020.",
+                       "Champ : décès journaliers de personnes agées de 18 à 29 ans survenus en France métropolitaine entre 2014 et 2020, sur la période du 1er janvier au 16 mars et du 30 octobre au 14 décembre.",
+                       "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
+           general_title = "", threeparttable = T)
+@
+\end{landscape}
+
 
 \subsubsection*{Un deuxième confinement moins restrictif ?}
 
