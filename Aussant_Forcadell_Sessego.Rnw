@@ -436,27 +436,31 @@ Enfin nos deux derniers modèles reprennent les modèles précédents en leur aj
 
 où l'indice $j$ correspond au jour de l'année, et $\alpha_j$ aux effets fixes propres à chaque jour. Par souci de cohérence les 29 février des années bissextiles 2016 et 2020 ne sont pas pris en compte dans les modèles.
 
-Dans la mesure où le nombre décès journaliers pour les années 2014 à 2017 ont été imputé à partir du nombre de décès mensuels, nous présentons séparément les régressions effectuées sur les années 2018-2020 puis sur l'ensemble des années 2014 à 2020. Pour les mêmes raisons, les régressions prenant en compte une effet « week-end » n'auraient pas eu de sens pour les années 2014 à 2017 et n'ont dont pas été réalisés. Le modèle 6 correspondant ainsi au modèle 4 sans effet weekend. On y a également substitué les effets fixes journaliers par des effets fixes mensuels, afin de s'adapter au niveau de précision des données disponibles. Par ailleurs, l'imputation du nombre de décès journaliers entraîne une réduction artificielle de la variance des données pour ces années. Les régressions portant sur l'ensemble des années 2014 à 2020 ont ainsi avant tout pour objet de confirmer la robustesse des coefficients observés pour les années 2018 à 2020. Enfin, l'ajout d'effets fixes au régressions portant sur la période du deuxième confinement n'a pas été techniquement possible, l'information contenue dans les données étant peut-être insuffisante pour estimer ces modèles.
+Dans la mesure où le nombre décès journaliers pour les années 2014 à 2017 ont été imputé à partir du nombre de décès mensuels, nous présentons séparément les régressions effectuées sur les années 2018-2020 puis sur l'ensemble des années 2014 à 2020. Pour les mêmes raisons, les régressions prenant en compte une effet « week-end » n'auraient pas eu de sens pour les années 2014 à 2017 et n'ont dont pas été réalisés. Le modèle 6 correspond ainsi au modèle 4 sans effet weekend, et dans lequel on a également substitué les effets fixes journaliers par des effets fixes mensuels afin de s'adapter au niveau de précision des données disponibles. Par ailleurs, l'imputation du nombre de décès journaliers entraîne une réduction artificielle de la variance des données pour ces années. Les régressions portant sur l'ensemble des années 2014 à 2020 ont ainsi avant tout pour objet de confirmer la robustesse des coefficients observés pour les années 2018 à 2020. Enfin, l'ajout d'effets fixes au régressions portant sur la période du deuxième confinement n'a pas été techniquement possible, l'information contenue dans les données semblant être insuffisante pour estimer ces modèles.
 
 
-\subsubsection*{Une réduction importante de la mortalité juvénile pendant le premier confinement}
+\subsection*{Une réduction importante de la mortalité juvénile pendant le premier confinement}
 
-Tableau \ref{tab:reg-conf1} :
+  L'ensemble des modèles confirment un effet net du premier confinement dans le sens d'une réduction de la mortalité des 18-29 ans par rapport aux années précédentes (Tableau \ref{tab:reg-conf1}). En tenant compte des marges d'erreurs, entre 1 et 4 vies auraient ainsi été « sauvées » chaque jour pendant cette période. Les modèles prenant en compte l'ensemble des années 2014 à 2020 présentent des coefficients très proches de ceux estimés sur les années 2018 à 2020, attestant ainsi de la solidité de ces résultats. On constate par ailleurs des variations importantes de la mortalité - et de l'effet du confinement sur cette mortalité - entre les jours de semaine et de week-end. Avant 2020, le nombre de décès juvéniles est plus élevé le week-end qu'en semaine, et cet écart est d'autant marqué plus sur la période allant du 17 mars au 10 mai que sur celle qui la précède. On peut supposer, à partir de ces résultats, que la moindre mortalité des jeunes pendant les périodes d'hiver est en partie liée à une réduction des déplacements et des comportements potentiellement à risques hors du domicile pendant les week-ends. L'interaction du troisième ordre entre année, période et week-end montrent que ce sont davantage les décès survenus pendant le week-end (entre 1 et 6 vies « sauvées ») qu'en semaine (entre 0 et 3 vies « sauvées ») qui ont été affectés par la période de confinement de 2020. Ce résultat va dans les sens d'une réduction des activités à risques le week-end chez les jeunes du fait des restrictions sanitaires.   
+
+la Figure \ref{fig:courbe_2014_2020} laisse toutefois penser qu'un pic de mortalité post-confinement serait venu « compenser » le nombre de décès juvéniles évités pendant le confinement. Pour tester cette hypothèse nous reprenons les mêmes modèles en considérant cette fois ensemble le premier confinement et la période d'entre-deux-confinements comme période de traitement (Tableau \ref{tab:reg-per23}). Les tendances mise en évidences par les différents modèles sont les mêmes : la mortalité a baissé par rapport aux années précédentes lorsque l'on considère ensemble la période de premier confinement et la période estivale qui l'a directement suivi, et cette baisse est principalement dû à une réduction du nombre de décès le week-end. L'amplitude de ces effets est cependant moindre que sur la seule période de confinement : le nombre de vies « sauvées » pendant les week-ends de ces deux périodes n'est plus compris qu'entre 0 et 3, tandis que ce nombre était estimé entre 1 et 6 dans les modèle ne prenant en compte que le confinement. Si la mortalité des 18-29 ans a donc bien été réduite par les mesures de confinement, il est possible que cette baisse est été en partie « compensée » par une hausse d'autaut plus forte du nombre de décès une fois les restrictions levées. 
+
+\subsection*{Un deuxième confinement moins restrictif ?}
+
+
+Les premières mesures de confinement ont été assez unanimement suivies par les personnes résidant en France, du fait de leur caractère inédit et de leur application à l'ensemble de la population (à l'exception près des travailleur·euses dit·es « essentiel·les »). Le deuxième confinement n'a pas bénéficié cet effet de nouveauté, et à fait l'objet de nombreuses dérogations notamment au sein des établissements scolaires et dans de nombreux secteurs d'activité. Ce confinement moins restrictif a-t-il eu le même effet bénéfique que le premier sur la mortalité des jeunes ? Les résultats des modèles apparaissent peu robustes et ne permettent pas de répondre à cette interrogation de manière certaines (Tableau \ref{tab:reg-conf2}). Seul la régression appliquée aux années 2014 à 2020 fait apparaître une réduction significative du nombre de décès sur la période du deuxième confinement, mais la fiabilité de ces résultats n'est pas assurée du fait de l'imprécision des données mobilisées. Ces résultats incertains laissent penser que l'effet du deuxième confinement sur la mortalité des 18-29 ans a été moins net que celui du premier, voire presque inexistants. 
+
+
+\subsection*{Moins de décès chez les jeunes hommes pendant les week-end du confinement}
+
+Tableau \ref{tab:reg-sexe} :
 \begin{itemize}
-\item entre 1 et 4 décès « sauvés » par jour pendant le premier confinement
-\item coefficients très proches quand on prend en compte 2014-2020
-\item avant 2020, nombre de décès plus élevé le week-end, et encore plus pendant la période du confinement (17 mars - 10 mai, probablement un effet saisonnier, n'est plus significatif quand on ajoute les effets fixes par jour ?)
-\item l'interaction d'ordre trois montre que c'est davantage des décès de week-end qui ont été évités pendant le confinement, ce qui va dans le sens d'une réduction des activités à risques en dehors du domicile chez les jeunes
+\item En nombre, plus de décès évités chez les hommes que chez les femmes
+\item Apparemment pas d'effet de week-end chez les femmes (confinement ou pas), alors qu'il est particulièrement marqué chez les hommes.
+\item Discuter la question du nombre vs du pourcentage de décès évités : la mortalité des femmes est beaucoup plus faible que celles des hommes en général, si on raisonne en termes relatifs c'est finalement chez elles que la mortalité à l'air d'avoir été la plus réduite pendant le confinement
+\item Globalement peu de décès et beaucoup de variations, donc par évident de tirer des conclusions certaines
 \end{itemize}
 
-Mais : la Figure \ref{fig:courbe_2014_2020} laisse penser qu'un pic de mortalité post-confinement serait venu « compenser » le nombre de décès évités pendant le confinement. Pour tester cette hypothèse nous reprenons les mêmes modèles en considérant cette fois ensemble le premier confinement et la période d'entre-deux-confinements comme période de traitement.\\
-
-
-Tableau \ref{tab:reg-per23} :
-\begin{itemize}
-\item les tendances sont les mêmes : moins de morts pendant le confinement qu'à la même période les années précédentes, en particulier le week-end
-\item mais les écarts entre les nombres de décès attendus et observés sont moins importants
-\end{itemize}
 
 \begin{landscape}
 <<label=reg-conf1, results=tex>>=
@@ -631,8 +635,8 @@ tab %>%
 @
 \end{landscape}
 
-\begin{landscape}
-<<label=reg-per3, results=tex>>=
+% \begin{landscape}
+<<label=reg-per3, eval=F, results=tex>>=
 reg1820_per3 <- felm(ndec ~ dicho_2019 + dicho_2020 + 
                         periode3 + dicho_2020:periode3,
                       data = deces_jours[periode %in% c(1,3) & 
@@ -693,22 +697,8 @@ tab %>%
                        "Seuils de significativité : p < 0,1 *; p < 0,05 **, p < 0,01 ***."), 
            general_title = "", threeparttable = T)
 @
-\end{landscape}
+% \end{landscape}
 
-
-\subsubsection*{Un deuxième confinement moins restrictif ?}
-
-Tableau \ref{tab:reg-conf2} : effet incertain, coefficients proches de zéro et variables selon les années considérées, plus ou moins significatif.
-
-\subsubsection*{Moins de décès chez les jeunes hommes pendant les week-end du confinement}
-
-Tableau \ref{tab:reg-sexe} :
-\begin{itemize}
-\item En nombre, plus de décès évités chez les hommes que chez les femmes
-\item Apparemment pas d'effet de week-end chez les femmes (confinement ou pas), alors qu'il est particulièrement marqué chez les hommes (alors même qu'on regarde les modèles à effets fixes ?)
-\item Discuter la question du nombre vs du pourcentage de décès évités : la mortalité des femmes est beaucoup plus faible que celles des hommes en général, si on raisonne en termes relatifs c'est finalement chez elles que la mortalité à l'air d'avoir été la plus réduite pendant le confinement
-\item Globalement peu de décès et beaucoup de variations, donc par évident de tirer des conclusions certaines
-\end{itemize}
 
 \begin{landscape}
 <<label=reg-conf2, results=tex>>=
@@ -864,6 +854,8 @@ tab %>%
 \section*{Conclusion (et Discussion?)}
 
 \begin{itemize}
+\item On a travaillé en prenant le début d'année comme période de pré-traitement, selon l'hypothèse que c'est la seule non affectée par la crise sanitaire en 2020, mais d'autres choix auraient pu être faits. On a aussi regardé les périodes de confinement dans leur ensemble, mais on aurait pu nuancer pour voir si les débuts de confinement étaient davantage respectés que les fins.
+\item Globalement délicat parce que la mortalité est faible chez les jeunes
 \item On aurait aimé avoir des données plus précises pour plusieurs années avant 2020, pour pouvoir identifier des tendances avec plus de précision.
 \item On aurait aimé avoir plus d'information sur les décès (cause, lieu) et les personnes décédées (origine sociale et profession notamment, parce que les comportements à risques ne sont pas les mêmes chez tous les jeunes, et que certaines professions ont été moins confinées que d'autres).
 \end{itemize}
