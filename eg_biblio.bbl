@@ -1,0 +1,166 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/global//global/global}
+    \entry{bouchet-valat_hypergamie_2018}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c4947969ce23c177797e76bb6254d0cc}{%
+           family={Bouchet-Valat},
+           familyi={B\bibinithyphendelim V\bibinitperiod},
+           given={Milan},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c4947969ce23c177797e76bb6254d0cc}
+      \strng{fullhash}{c4947969ce23c177797e76bb6254d0cc}
+      \strng{bibnamehash}{c4947969ce23c177797e76bb6254d0cc}
+      \strng{authorbibnamehash}{c4947969ce23c177797e76bb6254d0cc}
+      \strng{authornamehash}{c4947969ce23c177797e76bb6254d0cc}
+      \strng{authorfullhash}{c4947969ce23c177797e76bb6254d0cc}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Revue de l'{OFCE}}
+      \field{note}{Publisher: {OFCE}}
+      \field{number}{6}
+      \field{title}{Hypergamie et célibat selon le statut social en France depuis 1969}
+      \field{volume}{160}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{pages}{5\bibrangedash 45}
+      \range{pages}{41}
+    \endentry
+    \entry{favier_se_2021}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a28be83f6eec8b4bcb2c31ce29466fdb}{%
+           family={Favier},
+           familyi={F\bibinitperiod},
+           given={Elsa},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a28be83f6eec8b4bcb2c31ce29466fdb}
+      \strng{fullhash}{a28be83f6eec8b4bcb2c31ce29466fdb}
+      \strng{bibnamehash}{a28be83f6eec8b4bcb2c31ce29466fdb}
+      \strng{authorbibnamehash}{a28be83f6eec8b4bcb2c31ce29466fdb}
+      \strng{authornamehash}{a28be83f6eec8b4bcb2c31ce29466fdb}
+      \strng{authorfullhash}{a28be83f6eec8b4bcb2c31ce29466fdb}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{12}
+      \field{journaltitle}{Geneses}
+      \field{month}{7}
+      \field{note}{Publisher: Belin}
+      \field{number}{2}
+      \field{title}{Se forger un corps « désirable dans le pouvoir »}
+      \field{volume}{123}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{pages}{49\bibrangedash 68}
+      \range{pages}{20}
+    \endentry
+    \entry{mcrobbie_notes_2004}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=919f42cad66258cca0b20abdcb9ff2b8}{%
+           family={{McRobbie}},
+           familyi={M\bibinitperiod},
+           given={Angela},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{919f42cad66258cca0b20abdcb9ff2b8}
+      \strng{fullhash}{919f42cad66258cca0b20abdcb9ff2b8}
+      \strng{bibnamehash}{919f42cad66258cca0b20abdcb9ff2b8}
+      \strng{authorbibnamehash}{919f42cad66258cca0b20abdcb9ff2b8}
+      \strng{authornamehash}{919f42cad66258cca0b20abdcb9ff2b8}
+      \strng{authorfullhash}{919f42cad66258cca0b20abdcb9ff2b8}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Sociological Review}
+      \field{month}{10}
+      \field{number}{2}
+      \field{shortjournal}{The Sociological Review}
+      \field{title}{Notes on ‘What Not to Wear’ and Post-Feminist Symbolic Violence}
+      \field{urlday}{2}
+      \field{urlmonth}{3}
+      \field{urlyear}{2022}
+      \field{volume}{52}
+      \field{year}{2004}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{99\bibrangedash 109}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1111/j.1467-954X.2005.00526.x
+      \endverb
+    \endentry
+    \entry{skeggs_formations_1997}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=22d2f944cc9349c9aa75e737829ab386}{%
+           family={Skeggs},
+           familyi={S\bibinitperiod},
+           given={Beverley},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {London ; Thousand Oaks, Calif}%
+      }
+      \list{publisher}{1}{%
+        {SAGE}%
+      }
+      \strng{namehash}{22d2f944cc9349c9aa75e737829ab386}
+      \strng{fullhash}{22d2f944cc9349c9aa75e737829ab386}
+      \strng{bibnamehash}{22d2f944cc9349c9aa75e737829ab386}
+      \strng{authorbibnamehash}{22d2f944cc9349c9aa75e737829ab386}
+      \strng{authornamehash}{22d2f944cc9349c9aa75e737829ab386}
+      \strng{authorfullhash}{22d2f944cc9349c9aa75e737829ab386}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{pagetotal}{192}
+      \field{series}{Theory, Culture \& Society}
+      \field{shorttitle}{Formations of Class and Gender}
+      \field{title}{Formations of Class and Gender: Becoming Respectable}
+      \field{year}{1997}
+      \field{dateera}{ce}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

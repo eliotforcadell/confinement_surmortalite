@@ -87,7 +87,45 @@ diffdediff <- function(tab_dec, annees, periodes) {
 
 ## Comparaison des courbes de mortalité des jeunes entre 2018 et 2019 (conditions d'application de la différence de différences)
 
-```{r comp-annees, fig.cap="Nombre de décès chez les 18-29 ans en 2018 et 2019 en fonction de la période et du sexe", fig.width=10, fig.height = 4}
+```{r comp-annees, fig.cap="Nombre de décès chez les 18-29 ans en 2018 et 2019 en fonction de la période", fig.width=10, fig.height = 4}
+
+plots <- lapply(list(c(1,2), c(1,4), c(3,4)),
+                function(periodes) {
+                  ggplot(tab_dec[ADEC %in% 2018:2019 & periode %in% periodes]) +
+                    geom_line(aes(x = factor(periode, labels = labs_per[periodes]),
+                                  y = ndec,
+                                  group = factor(ADEC), 
+                                  colour = factor(ADEC))) +
+                    scale_colour_manual("", values = viridis::viridis(2, begin = 0.2, end = 0.8)) +
+                    labs(x = "", y = "")
+                })
+
+ggarrange(plotlist = plots, common.legend = T, nrow = 1)
+
+```
+
+```{r comp-annees-moy, fig.cap="Nombre moyen de décès journaliers chez les 18-29 ans en 2018 et 2019 en fonction de la période", fig.width=10, fig.height = 4}
+
+plots <- lapply(list(c(1,2), c(1,4), c(3,4)),
+                function(periodes) {
+                  ggplot(tab_dec[data.table(periode = 1:5, 
+                                                 njours = c(75, 56, 171, 48, 15)),
+                                      .(periode, ADEC, moydec = ndec/njours), 
+                                      on = "periode"
+                                      ][ADEC %in% 2018:2019 & periode %in% periodes]) +
+                    geom_line(aes(x = factor(periode, labels = labs_per[periodes]),
+                                  y = moydec,
+                                  group = factor(ADEC),
+                                  colour = factor(ADEC))) +
+                    scale_colour_manual("", values = viridis::viridis(2, begin = 0.2, end = 0.8)) +
+                    labs(x = "", y = "")
+                })
+
+ggarrange(plotlist = plots, common.legend = T, nrow = 1)
+```
+
+\newpage
+```{r comp-annees-sexe, fig.cap="Nombre de décès chez les 18-29 ans en 2018 et 2019 en fonction de la période et du sexe", fig.width=10, fig.height = 4}
 
 plots <- lapply(list(c(1,2), c(1,4), c(3,4)),
                 function(periodes) {
@@ -106,7 +144,7 @@ ggarrange(plotlist = plots, common.legend = T, nrow = 1)
 
 ```
 
-```{r comp-annees-moy, fig.cap="Nombre moyen de décès journaliers chez les 18-29 ans en 2018 et 2019 en fonction de la période et du sexe", fig.width=10, fig.height = 4}
+```{r comp-annees-moy-sexe, fig.cap="Nombre moyen de décès journaliers chez les 18-29 ans en 2018 et 2019 en fonction de la période et du sexe", fig.width=10, fig.height = 4}
 
 plots <- lapply(list(c(1,2), c(1,4), c(3,4)),
                 function(periodes) {
@@ -301,6 +339,71 @@ ggarrange(plotlist = plots) %>%
 - Dans son fil twitter O. Godechot a des tests de significativité sur ses estimateurs pour les hommes et les femmes, à quoi est-ce qu'ils correspondent ? Est-ce que c'est lié à l'utilisation d'une moyenne sur deux ans ?
 
 
+```{r}
+deces_2018 <- deces[ADEC == 2018]
+deces_2019 <- deces[ADEC == 2019]
+deces_2020 <- deces[ADEC == 2020]
+library(lubridate)
+ggplot(data = deces, aes(x=date_dec)) + 
+  geom_freqpoly()
+
+str(deces$md_dec)
+deces$date_dc_graph <- mdy(paste0(deces$md_dec,"-2020"))
+
+
+ggplot() + 
+    geom_freqpoly(data = deces, aes(x=date_dc_graph, group = ADEC, color = as.factor(ADEC)), 
+                 #kernel = "gaussian", 
+                 binwidth = 21)   +
+  scale_x_date(limits = c(ymd("2020-01-01"),ymd("2020-12-31"))) +
+  geom_vline(xintercept = ymd("2020-03-17")) +
+  geom_vline(xintercept = ymd("2020-05-11"))+
+  geom_vline(xintercept = ymd("2020-10-30")) +
+  geom_vline(xintercept = ymd("2020-12-15"))# +
+  # facet_wrap(~ factor(SEXE)) 
+
+
+ggplot() +
+    geom_freqpoly(data = deces, aes(x=date_dc_graph, group = ADEC, color = as.factor(ADEC)),
+                 #kernel = "gaussian",
+                 binwidth = 28)   +
+  scale_x_date(limits = c(ymd("2020-01-01"),ymd("2020-12-31"))) +
+  geom_vline(xintercept = ymd("2020-03-17")) +
+  geom_vline(xintercept = ymd("2020-05-11"))+
+  geom_vline(xintercept = ymd("2020-10-30")) +
+  geom_vline(xintercept = ymd("2020-12-15")) +
+   facet_wrap(~ factor(SEXE))
+
+
+
+ggplot() + 
+    geom_density(data = deces, aes(x=date_dc_graph, group = ADEC, color = as.factor(ADEC)), 
+                 kernel = "gaussian", bw = 14)   +
+  scale_x_date(limits = c(ymd("2020-01-01"),ymd("2020-12-31"))) +
+  geom_vline(xintercept = ymd("2020-03-17")) +
+  geom_vline(xintercept = ymd("2020-05-11"))+
+  geom_vline(xintercept = ymd("2020-10-30")) +
+  geom_vline(xintercept = ymd("2020-12-15"))# +
+  # facet_wrap(~ factor(SEXE))
+
+ggplot() + 
+    geom_density(data = deces, aes(x=date_dc_graph, group = ADEC, color = as.factor(ADEC)), 
+                 kernel = "gaussian", bw = 21)   +
+  scale_x_date(limits = c(ymd("2020-01-01"),ymd("2020-12-31"))) +
+  geom_vline(xintercept = ymd("2020-03-17")) +
+  geom_vline(xintercept = ymd("2020-05-11"))+
+  geom_vline(xintercept = ymd("2020-10-30")) +
+  geom_vline(xintercept = ymd("2020-12-15")) +
+   facet_wrap(~ factor(SEXE))
+
+dc_day <- deces %>% group_by(ADEC) %>% freq(date_dc_graph)
+
+
+
+
+freq(deces_2018$date_dec)
+  
+```
 
 
 
