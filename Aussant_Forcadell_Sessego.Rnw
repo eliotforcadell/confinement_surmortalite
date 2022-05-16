@@ -453,13 +453,10 @@ Les premières mesures de confinement ont été assez unanimement suivies par le
 
 \subsection*{Moins de décès chez les jeunes hommes pendant les week-end du confinement}
 
-Tableau \ref{tab:reg-sexe} :
-\begin{itemize}
-\item En nombre, plus de décès évités chez les hommes que chez les femmes
-\item Apparemment pas d'effet de week-end chez les femmes (confinement ou pas), alors qu'il est particulièrement marqué chez les hommes.
-\item Discuter la question du nombre vs du pourcentage de décès évités : la mortalité des femmes est beaucoup plus faible que celles des hommes en général, si on raisonne en termes relatifs c'est finalement chez elles que la mortalité à l'air d'avoir été la plus réduite pendant le confinement
-\item Globalement peu de décès et beaucoup de variations, donc par évident de tirer des conclusions certaines
-\end{itemize}
+La comparaison entre hommes et femmes apparait comme particulièrement éclairante et tout à fait en accord avec la littérature citée en introduction. On voit dans le tableau \ref{tab:reg-sexe} que dans tous les cas considérés, l'effet protecteur du confinement est plus important chez les hommes. Sans contrôler par l'effet weekend (modèle 4), on voit une baisse de la mortalité journalière moyenne deux fois plus importante chez les hommes que chez les femmes. Cela dit, les intervalles de confiances invitent à la prudence, les deux intervalles se recoupant assez largement. En revanche, l'effet weekend différentié selon le sexe ne trompe pas. On n’observe pas de baisse significative de la mortalité journalière les weekends du premier confinement chez les femmes, alors qu'on observe une baisse d'entre 1,9 et 7,1 par jours chez les hommes, intervalle de confiance à 95 \% strictement distinct de celui des femmes. L'hypothèse de pratique risqués proprement masculine rendu moins probable par l'application du confinement (typiquement, la conduite en état d'ébriété) trouve ici un argument statistique convaincant.
+
+La faiblesse des décès féminin suppose la plus grande prudence interprétative. En effet, en l’espèce, nos données ne permettent pas d’affirmer que l’effet du confinement a été réellement plus fort sur les hommes, si ce n’est lors des weekends. Le taux de décès journalier féminin étant à l’origine beaucoup plus faible, il est normal d’observer une variation en valeur absolue plus faible chez elles, même si l’effet propre éventuel est potentiellement similaire à celui des hommes lors de la semaine. On souffre ici de l’imprécision des estimateurs dû aux faibles effectifs.
+
 
 
 \begin{landscape}
@@ -853,12 +850,7 @@ tab %>%
 
 \section*{Conclusion (et Discussion?)}
 
-\begin{itemize}
-\item On a travaillé en prenant le début d'année comme période de pré-traitement, selon l'hypothèse que c'est la seule non affectée par la crise sanitaire en 2020, mais d'autres choix auraient pu être faits. On a aussi regardé les périodes de confinement dans leur ensemble, mais on aurait pu nuancer pour voir si les débuts de confinement étaient davantage respectés que les fins.
-\item Globalement délicat parce que la mortalité est faible chez les jeunes
-\item On aurait aimé avoir des données plus précises pour plusieurs années avant 2020, pour pouvoir identifier des tendances avec plus de précision.
-\item On aurait aimé avoir plus d'information sur les décès (cause, lieu) et les personnes décédées (origine sociale et profession notamment, parce que les comportements à risques ne sont pas les mêmes chez tous les jeunes, et que certaines professions ont été moins confinées que d'autres).
-\end{itemize}
+Plusieurs indices statistiques développés dans cet article laissent entrevoir un effet causal du premier confinement sur la mortalité journalière des 18 – 29 ans, en particulier chez les jeunes hommes le weekend. Certaines caractéristiques du dispositif statistique laissent cependant planer un doute relatif sur la crédibilité de l’hypothèse identifiante. En effet, la faiblesse de la mortalité des jeune et sa grande variabilité requiert de disposer de données précises. Ces données précises nous manquent pour les années 2017 à 2014. En toute rigueur, on ne peut en l’état affirmer de manière absolument ferme que les variations mesurées ne sont pas dû à un aléa inobservé propre à l’année 2020 non relatif au confinement. Tout dispositif d’identification causal, qu’il soit expérimental ou pseudo expérimental comme ici contient une part d’incertitude quant à l’existence de facteurs de confusion non pris en compte. Cela étant, le fait qu’on observe une baisse de la mortalité uniquement lors du confinement le plus stricte (le premier) et particulièrement le weekend chez les hommes, cela de manière cohérente avec certaines observations formulées dans la littérature consacrée à la mortalité des jeunes, confère une bonne crédibilité au schéma d’analyse présenté, au-delà de l’argumentation purement statistique. Dans cette perspective, disposer des causes de décès aurait pu permettre d’affiner nos conclusions, notamment concernant la place de la mortalité routière, qu’on a supposé être l’une des premières causes concernées par l’effet du confinement. Par ailleurs il aurait pu être intéressant de faire varier les périodes testés, notamment en s’interrogeant sur un respect plus ou moins effectif du confinement en début ou fin de période. A nouveau, on est limité par les effectifs qui offre peu de latitude pour découper de manière plus fine la population.
 
 
 
