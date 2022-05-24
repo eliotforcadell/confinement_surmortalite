@@ -1,5 +1,0 @@
-[0] Config.pm:304> INFO - This is Biber 2.14
-[0] Config.pm:307> INFO - Logfile is 'Aussant_Forcadell_Sesseg.blg'
-[149] biber-darwin:322> INFO - === Mar mai 24, 2022, 12:32:03
-[354] Utils.pm:320> ERROR - Cannot find 'Aussant_Forcadell_Sesseg.bcf'!
-[354] Biber.pm:132> INFO - ERRORS: 1
