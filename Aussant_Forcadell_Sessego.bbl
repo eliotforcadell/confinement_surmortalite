@@ -1,0 +1,703 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/global//global/global}
+    \entry{breton_levolution_2019}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=8e78b9c0fbd6ca04622cc1d95c8aabf5}{%
+           family={Breton},
+           familyi={B\bibinitperiod},
+           given={Didier},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d5a65042aebd297bdf17dbd28a23fa04}{%
+           family={Barbieri},
+           familyi={B\bibinitperiod},
+           given={Magali},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c6cc8bcbb22da654ad301e309d9ebc65}{%
+           family={d’Albis},
+           familyi={d\bibinitperiod},
+           given={Hippolyte},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fc180f844e635d576e1518e4c943f830}{%
+           family={Mazuy},
+           familyi={M\bibinitperiod},
+           given={Magali},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1d7a665a711aecc2fd0cbed54b9ad692}
+      \strng{fullhash}{122879e7384421502ca5642321ca3a29}
+      \strng{bibnamehash}{122879e7384421502ca5642321ca3a29}
+      \strng{authorbibnamehash}{122879e7384421502ca5642321ca3a29}
+      \strng{authornamehash}{1d7a665a711aecc2fd0cbed54b9ad692}
+      \strng{authorfullhash}{122879e7384421502ca5642321ca3a29}
+      \field{extraname}{1}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{18}
+      \field{issn}{0032-4663}
+      \field{journaltitle}{Population}
+      \field{langid}{french}
+      \field{month}{4}
+      \field{number}{4}
+      \field{shorttitle}{L’évolution démographique récente de la France. Naissances, décès, unions et migrations}
+      \field{title}{L’évolution démographique récente de la France. Naissances, décès, unions et migrations : à chacun sa saison:}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{volume}{Vol. 73}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{623\bibrangedash 692}
+      \range{pages}{70}
+      \verb{doi}
+      \verb 10.3917/popu.1804.0623
+      \endverb
+      \verb{file}
+      \verb Breton et al. - 2019 - L’évolution démographique récente de la France. Na.pdf:/Users/arianesessego/Zotero/storage/Q935G64K/Breton et al. - 2019 - L’évolution démographique récente de la France. Na.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cairn.info/revue-population-2018-4-page-623.htm?ref=doi
+      \endverb
+      \verb{url}
+      \verb https://www.cairn.info/revue-population-2018-4-page-623.htm?ref=doi
+      \endverb
+    \endentry
+    \entry{breton_levolution_2022}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=8e78b9c0fbd6ca04622cc1d95c8aabf5}{%
+           family={Breton},
+           familyi={B\bibinitperiod},
+           given={Didier},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bc68a0afb0b79c1f65045be11999fc8e}{%
+           family={Belliot},
+           familyi={B\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d5a65042aebd297bdf17dbd28a23fa04}{%
+           family={Barbieri},
+           familyi={B\bibinitperiod},
+           given={Magali},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c6cc8bcbb22da654ad301e309d9ebc65}{%
+           family={d’Albis},
+           familyi={d\bibinitperiod},
+           given={Hippolyte},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fc180f844e635d576e1518e4c943f830}{%
+           family={Mazuy},
+           familyi={M\bibinitperiod},
+           given={Magali},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1d7a665a711aecc2fd0cbed54b9ad692}
+      \strng{fullhash}{579ca9933bd67824bf22afd4d7100579}
+      \strng{bibnamehash}{579ca9933bd67824bf22afd4d7100579}
+      \strng{authorbibnamehash}{579ca9933bd67824bf22afd4d7100579}
+      \strng{authornamehash}{1d7a665a711aecc2fd0cbed54b9ad692}
+      \strng{authorfullhash}{579ca9933bd67824bf22afd4d7100579}
+      \field{extraname}{2}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{31}
+      \field{issn}{0032-4663}
+      \field{journaltitle}{Population}
+      \field{langid}{french}
+      \field{month}{3}
+      \field{number}{4}
+      \field{shorttitle}{L’évolution démographique récente de la France}
+      \field{title}{L’évolution démographique récente de la France: Moins de naissances, de mariages et de migrations, plus de décès… la Covid-19 bouleverse la dynamique de la population française}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{volume}{Vol. 76}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{577\bibrangedash 638}
+      \range{pages}{62}
+      \verb{doi}
+      \verb 10.3917/popu.2104.0577
+      \endverb
+      \verb{file}
+      \verb Breton et al. - 2022 - L’évolution démographique récente de la France Mo.pdf:/Users/arianesessego/Zotero/storage/VKGR73YW/Breton et al. - 2022 - L’évolution démographique récente de la France Mo.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cairn.info/revue-population-2021-4-page-577.htm?ref=doi
+      \endverb
+      \verb{url}
+      \verb https://www.cairn.info/revue-population-2021-4-page-577.htm?ref=doi
+      \endverb
+    \endentry
+    \entry{gastineau_lepidemie_2022}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=b6e563d5481c4b1a0b00bb625055ef15}{%
+           family={Gastineau},
+           familyi={G\bibinitperiod},
+           given={Bénédicte},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c329f3b219010dfcc744807fdd1f8f24}{%
+           family={Golaz},
+           familyi={G\bibinitperiod},
+           given={Valérie},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b3e4aef05893f654a94ec4b5334e79e9}{%
+           family={Flahaux},
+           familyi={F\bibinitperiod},
+           given={Marie-Laurence},
+           giveni={M\bibinithyphendelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6e22699f2233d7886b4e23808c6ceb0e}{%
+           family={Santos},
+           familyi={S\bibinitperiod},
+           given={Stéphanie\bibnamedelima {DOS}},
+           giveni={S\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{22915faf66a10c4a6d08246c48eebc89}
+      \strng{fullhash}{c96055036c8a61a44d04229593a061e7}
+      \strng{bibnamehash}{c96055036c8a61a44d04229593a061e7}
+      \strng{authorbibnamehash}{c96055036c8a61a44d04229593a061e7}
+      \strng{authornamehash}{22915faf66a10c4a6d08246c48eebc89}
+      \strng{authorfullhash}{c96055036c8a61a44d04229593a061e7}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Dans cet article, nous rappelons la façon dont les données sur la mortalité et sur les causes de décès sont rassemblées et analysées en temps normal en France. Nous détaillons ensuite comment les organismes compétents (Insee, Inserm) ont mis en place des mesures exceptionnelles pour produire plus rapidement des statistiques sur la mortalité et les contaminations pendant l’épidémie de la {COVID}-19. Ces statistiques sont reprises par les médias et utilisées par les pouvoirs publics et le monde politique. Nous appelons à beaucoup de prudence quant à l’interprétation et l’utilisation de ces données dont le traitement est encore en cours.}
+      \field{day}{3}
+      \field{journaltitle}{Statistique et Société}
+      \field{langid}{french}
+      \field{month}{5}
+      \field{note}{Number: 1}
+      \field{number}{1}
+      \field{shorttitle}{L’épidémie de {COVID}-19 en France}
+      \field{title}{L’épidémie de {COVID}-19 en France : la prudence s’impose face aux chiffres}
+      \field{urlday}{15}
+      \field{urlmonth}{5}
+      \field{urlyear}{2022}
+      \field{volume}{10}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{9\bibrangedash 18}
+      \range{pages}{10}
+      \verb{file}
+      \verb Full Text PDF:/Users/arianesessego/Zotero/storage/ZEZI4IPI/Gastineau et al. - 2022 - L’épidémie de COVID-19 en France la prudence s’i.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://statistique-et-societe.fr/article/view/840
+      \endverb
+      \verb{url}
+      \verb http://statistique-et-societe.fr/article/view/840
+      \endverb
+    \endentry
+    \entry{goldstein_secular_2011}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9cd33abc2cf32361f79afd32ad543a17}{%
+           family={Goldstein},
+           familyi={G\bibinitperiod},
+           given={Joshua\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9cd33abc2cf32361f79afd32ad543a17}
+      \strng{fullhash}{9cd33abc2cf32361f79afd32ad543a17}
+      \strng{bibnamehash}{9cd33abc2cf32361f79afd32ad543a17}
+      \strng{authorbibnamehash}{9cd33abc2cf32361f79afd32ad543a17}
+      \strng{authornamehash}{9cd33abc2cf32361f79afd32ad543a17}
+      \strng{authorfullhash}{9cd33abc2cf32361f79afd32ad543a17}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This paper shows new evidence of a steady long-term decline in age of male sexual maturity since at least the mid-eighteenth century. A method for measuring the timing of male maturity is developed based on the age at which male young adult mortality accelerates. The method is applied to mortality data from Sweden, Denmark, Norway, the United Kingdom, and Italy. The secular trend toward earlier male sexual maturity parallels the trend toward earlier menarche for females, suggesting that common environmental cues influence the speed of both males' and females' sexual maturation.}
+      \field{issn}{1932-6203}
+      \field{journaltitle}{{PloS} One}
+      \field{number}{8}
+      \field{shortjournal}{{PLoS} One}
+      \field{shorttitle}{A secular trend toward earlier male sexual maturity}
+      \field{title}{A secular trend toward earlier male sexual maturity: evidence from shifting ages of male young adult mortality}
+      \field{volume}{6}
+      \field{year}{2011}
+      \field{dateera}{ce}
+      \field{pages}{e14826}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0014826
+      \endverb
+      \verb{file}
+      \verb Texte intégral:/Users/arianesessego/Zotero/storage/IY7J8R4C/Goldstein - 2011 - A secular trend toward earlier male sexual maturit.pdf:application/pdf
+      \endverb
+      \keyw{Adolescent,Adult,Age Factors,Denmark,Female,Humans,Italy,Male,Menarche,Norway,Puberty,Sex Factors,Sexual Maturation,Sweden,United Kingdom,Young Adult}
+    \endentry
+    \entry{heligman_age_1980}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=510da17783bea1f6fb55ffcd86c664f0}{%
+           family={Heligman},
+           familyi={H\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6b851855de8821710281eb6423097234}{%
+           family={Pollard},
+           familyi={P\bibinitperiod},
+           given={J.\bibnamedelimi H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f4b5b8853978def9eddd4b579521922b}
+      \strng{fullhash}{49aec990a5a66e6cc294604193b02c21}
+      \strng{bibnamehash}{49aec990a5a66e6cc294604193b02c21}
+      \strng{authorbibnamehash}{49aec990a5a66e6cc294604193b02c21}
+      \strng{authornamehash}{f4b5b8853978def9eddd4b579521922b}
+      \strng{authorfullhash}{49aec990a5a66e6cc294604193b02c21}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The development of a ‘law of mortality’, a mathematical expression for the graduation of the age pattern of mortality, has been of interest since the development of the first life tables by John Graunt (1662) and Edmund Halley (1693). Although Abraham De Moivre proposed a very simple law as early as 1725 the best known early contribution is probably that of Benjamin Gompertz (1825). Since World War {II} mathematical formulae have been used to graduate sections of the English Life Tables, as well as assured lives mortality, and pensioner and annuitant mortality. Reviews of attempts at finding the ‘law of mortality’ have been given by Elston and Benjamin and Haycocks.}
+      \field{issn}{2058-1009, 0020-2681}
+      \field{journaltitle}{Journal of the Institute of Actuaries}
+      \field{langid}{english}
+      \field{month}{1}
+      \field{note}{Publisher: Cambridge University Press}
+      \field{number}{1}
+      \field{title}{The age pattern of mortality}
+      \field{urlday}{24}
+      \field{urlmonth}{5}
+      \field{urlyear}{2022}
+      \field{volume}{107}
+      \field{year}{1980}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{49\bibrangedash 80}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.1017/S0020268100040257
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:/Users/arianesessego/Zotero/storage/2VVGN2SL/Heligman et Pollard - 1980 - The age pattern of mortality.pdf:application/pdf;Snapshot:/Users/arianesessego/Zotero/storage/8VN7HB84/080CA48AF00A73CE4D2888A6E1AA7385.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cambridge.org/core/journals/journal-of-the-institute-of-actuaries/article/age-pattern-of-mortality/080CA48AF00A73CE4D2888A6E1AA7385
+      \endverb
+      \verb{url}
+      \verb https://www.cambridge.org/core/journals/journal-of-the-institute-of-actuaries/article/age-pattern-of-mortality/080CA48AF00A73CE4D2888A6E1AA7385
+      \endverb
+    \endentry
+    \entry{letourneur_suicide_2022}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=5ca79ab1107190f0b08753035cce3b1d}{%
+           family={Letourneur},
+           familyi={L\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5f02a78e00719e8a96611d1d365ab000}{%
+           family={Collonge},
+           familyi={C\bibinitperiod},
+           given={Louise},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=109e7f97227ef27a8bd899408a6efc90}{%
+           family={Makdassi},
+           familyi={M\bibinitperiod},
+           given={Alexandre},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2b2e1518cd79de2e299e491d10a5294c}{%
+           family={Gérard},
+           familyi={G\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e5dc2c1735ca3a11f9fc8babdadc33c5}{%
+           family={Boittiaux},
+           familyi={B\bibinitperiod},
+           given={Gérard},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2c8db11f0c7445e7bd52df491cdb7a04}{%
+           family={Chastang},
+           familyi={C\bibinitperiod},
+           given={Françoise},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c3de3092c85c61af086c1ed5c227ecc5}
+      \strng{fullhash}{88a87aa8705a969f4f23cf83b70e2cc1}
+      \strng{bibnamehash}{88a87aa8705a969f4f23cf83b70e2cc1}
+      \strng{authorbibnamehash}{88a87aa8705a969f4f23cf83b70e2cc1}
+      \strng{authornamehash}{c3de3092c85c61af086c1ed5c227ecc5}
+      \strng{authorfullhash}{88a87aa8705a969f4f23cf83b70e2cc1}
+      \field{sortinit}{L}
+      \field{sortinithash}{dad3efd0836470093a7b4a7bb756eb8c}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{2}
+      \field{issn}{0020-7411}
+      \field{journaltitle}{International Journal of Mental Health}
+      \field{month}{1}
+      \field{note}{Publisher: Routledge \_eprint: https://doi.org/10.1080/00207411.2021.2015230}
+      \field{number}{1}
+      \field{shorttitle}{Suicide attempts and {COVID}-19 related confinement measures in France}
+      \field{title}{Suicide attempts and {COVID}-19 related confinement measures in France: Happy ending or dangerous liaisons?}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{volume}{51}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{95\bibrangedash 97}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1080/00207411.2021.2015230
+      \endverb
+      \verb{file}
+      \verb Snapshot:/Users/arianesessego/Zotero/storage/PY9LPPQN/00207411.2021.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1080/00207411.2021.2015230
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1080/00207411.2021.2015230
+      \endverb
+    \endentry
+    \entry{olie_hospitalizations_2021}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=36da62fd9f1134fc3289bd8de04ef53e}{%
+           family={Olié},
+           familyi={O\bibinitperiod},
+           given={Emilie},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5ccc604dccd1d096a7403c608c0d8610}{%
+           family={Nogue},
+           familyi={N\bibinitperiod},
+           given={Erika},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b134ead8948b58fc13cb5faa71cc184a}{%
+           family={Picot},
+           familyi={P\bibinitperiod},
+           given={Marie},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8acf16f5954bf1ae96c3aa34ad92702d}{%
+           family={Courtet},
+           familyi={C\bibinitperiod},
+           given={Philippe},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{eb3af9d7079cc920a2af677cd3d35bb9}
+      \strng{fullhash}{451588aeb0bd9dc8a415c2755dcd24c1}
+      \strng{bibnamehash}{451588aeb0bd9dc8a415c2755dcd24c1}
+      \strng{authorbibnamehash}{451588aeb0bd9dc8a415c2755dcd24c1}
+      \strng{authornamehash}{eb3af9d7079cc920a2af677cd3d35bb9}
+      \strng{authorfullhash}{451588aeb0bd9dc8a415c2755dcd24c1}
+      \field{sortinit}{O}
+      \field{sortinithash}{ff8d4eeb5101e3cf3809959b3592d942}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0001-690X}
+      \field{journaltitle}{Acta Psychiatrica Scandinavica}
+      \field{month}{6}
+      \field{number}{6}
+      \field{shortjournal}{Acta Psychiatr Scand}
+      \field{title}{Hospitalizations for suicide attempt during the first {COVID}‐19 lockdown in France}
+      \field{urlday}{29}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{volume}{143}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{535\bibrangedash 536}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1111/acps.13296
+      \endverb
+      \verb{urlraw}
+      \verb https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8250776/
+      \endverb
+      \verb{url}
+      \verb https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8250776/
+      \endverb
+    \endentry
+    \entry{papon_bilan_2021}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=57efc01d8abb1329506dd5a816b204d2}{%
+           family={Papon},
+           familyi={P\bibinitperiod},
+           given={Sylvain},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2226906d28b547e571532c8daa3fe4cd}{%
+           family={Beaumel},
+           familyi={B\bibinitperiod},
+           given={Catherine},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{880116b68326e79bd2e562521fb491ff}
+      \strng{fullhash}{ac18ebd5965a437e4283ff850dbe7eb4}
+      \strng{bibnamehash}{ac18ebd5965a437e4283ff850dbe7eb4}
+      \strng{authorbibnamehash}{ac18ebd5965a437e4283ff850dbe7eb4}
+      \strng{authornamehash}{880116b68326e79bd2e562521fb491ff}
+      \strng{authorfullhash}{ac18ebd5965a437e4283ff850dbe7eb4}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{{INSEE} Première}
+      \field{month}{3}
+      \field{title}{Bilan démographique 2020}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{file}
+      \verb IP1846.pdf:/Users/arianesessego/Zotero/storage/5NGFML8S/IP1846.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{pison_france_2021}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=1ce1485719a32334a0f9ffa1fea06a4d}{%
+           family={Pison},
+           familyi={P\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4a8fc0034752048ac8dfae06966095aa}{%
+           family={Meslé},
+           familyi={M\bibinitperiod},
+           given={France},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{33098d1a94490a7791b8dac7d1dcad33}
+      \strng{fullhash}{9537b6fac502506e3a2835ff938c7c7f}
+      \strng{bibnamehash}{9537b6fac502506e3a2835ff938c7c7f}
+      \strng{authorbibnamehash}{9537b6fac502506e3a2835ff938c7c7f}
+      \strng{authornamehash}{33098d1a94490a7791b8dac7d1dcad33}
+      \strng{authorfullhash}{9537b6fac502506e3a2835ff938c7c7f}
+      \field{extraname}{1}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{19}
+      \field{issn}{0184-7783}
+      \field{journaltitle}{Population \& Sociétés}
+      \field{langid}{french}
+      \field{month}{3}
+      \field{number}{3}
+      \field{shorttitle}{France 2020}
+      \field{title}{France 2020 : 68 000 décès supplémentaires imputables à l’épidémie de Covid-19:}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{volume}{N° 587}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 4}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.3917/popsoc.587.0001
+      \endverb
+      \verb{file}
+      \verb Pison et Meslé - 2021 - France 2020 68 000 décès supplémentaires imputab.pdf:/Users/arianesessego/Zotero/storage/DMZC2UMH/Pison et Meslé - 2021 - France 2020 68 000 décès supplémentaires imputab.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cairn.info/revue-population-et-societes-2021-3-page-1.htm?ref=doi
+      \endverb
+      \verb{url}
+      \verb https://www.cairn.info/revue-population-et-societes-2021-3-page-1.htm?ref=doi
+      \endverb
+    \endentry
+    \entry{pison_covid-19_2022}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=1ce1485719a32334a0f9ffa1fea06a4d}{%
+           family={Pison},
+           familyi={P\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4a8fc0034752048ac8dfae06966095aa}{%
+           family={Meslé},
+           familyi={M\bibinitperiod},
+           given={France},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{33098d1a94490a7791b8dac7d1dcad33}
+      \strng{fullhash}{9537b6fac502506e3a2835ff938c7c7f}
+      \strng{bibnamehash}{9537b6fac502506e3a2835ff938c7c7f}
+      \strng{authorbibnamehash}{9537b6fac502506e3a2835ff938c7c7f}
+      \strng{authornamehash}{33098d1a94490a7791b8dac7d1dcad33}
+      \strng{authorfullhash}{9537b6fac502506e3a2835ff938c7c7f}
+      \field{extraname}{2}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{23}
+      \field{issn}{0184-7783}
+      \field{journaltitle}{Population \& Sociétés}
+      \field{langid}{french}
+      \field{month}{3}
+      \field{number}{3}
+      \field{shorttitle}{La Covid-19 plus meurtrière pour les hommes que pour les femmes}
+      \field{title}{La Covid-19 plus meurtrière pour les hommes que pour les femmes:}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{volume}{N° 598}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 4}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.3917/popsoc.598.0001
+      \endverb
+      \verb{file}
+      \verb Pison et Meslé - 2022 - La Covid-19 plus meurtrière pour les hommes que po.pdf:/Users/arianesessego/Zotero/storage/TJRH2CI4/Pison et Meslé - 2022 - La Covid-19 plus meurtrière pour les hommes que po.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cairn.info/revue-population-et-societes-2022-3-page-1.htm?ref=doi
+      \endverb
+      \verb{url}
+      \verb https://www.cairn.info/revue-population-et-societes-2022-3-page-1.htm?ref=doi
+      \endverb
+    \endentry
+    \entry{remund_surmortalite_2021}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=06545dfdbb4e6c647161d56e78096cc9}{%
+           family={Remund},
+           familyi={R\bibinitperiod},
+           given={Adrien},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dedbd1b96187802743e379671b35af5c}{%
+           family={Camarda},
+           familyi={C\bibinitperiod},
+           given={Carlo\bibnamedelima Giovanni},
+           giveni={C\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bbcbf2a022e2ace8599c0a0ad3e32e35}{%
+           family={Riffe},
+           familyi={R\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{80c4beb998054e1f5921bb6c2769683b}
+      \strng{fullhash}{06a3ecc857431a480c838e208552531b}
+      \strng{bibnamehash}{06a3ecc857431a480c838e208552531b}
+      \strng{authorbibnamehash}{06a3ecc857431a480c838e208552531b}
+      \strng{authornamehash}{80c4beb998054e1f5921bb6c2769683b}
+      \strng{authorfullhash}{06a3ecc857431a480c838e208552531b}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{day}{4}
+      \field{issn}{0184-7783}
+      \field{journaltitle}{Population \& Sociétés}
+      \field{langid}{french}
+      \field{month}{6}
+      \field{number}{6}
+      \field{shorttitle}{La surmortalité des jeunes adultes est-elle naturelle ?}
+      \field{title}{La surmortalité des jeunes adultes est-elle naturelle ?:}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2022}
+      \field{volume}{N° 590}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 4}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.3917/popsoc.590.0001
+      \endverb
+      \verb{file}
+      \verb Remund et al. - 2021 - La surmortalité des jeunes adultes est-elle nature.pdf:/Users/arianesessego/Zotero/storage/M796K6S7/Remund et al. - 2021 - La surmortalité des jeunes adultes est-elle nature.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.cairn.info/revue-population-et-societes-2021-6-page-1.htm?ref=doi
+      \endverb
+      \verb{url}
+      \verb https://www.cairn.info/revue-population-et-societes-2021-6-page-1.htm?ref=doi
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

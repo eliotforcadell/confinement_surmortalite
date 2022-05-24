@@ -2786,13 +2786,26 @@
   <!-- CITATION DATA -->
   <!-- SECTION 0 -->
   <bcf:bibdata section="0">
-    <bcf:datasource type="file" datatype="bibtex">test_biblio.bib</bcf:datasource>
+    <bcf:datasource type="file" datatype="bibtex">Aussant_Forcadell_Sessego_biblio.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">bouchet-valat_hypergamie_2018</bcf:citekey>
-    <bcf:citekey order="2">favier_se_2021</bcf:citekey>
-    <bcf:citekey order="3">mcrobbie_notes_2004</bcf:citekey>
-    <bcf:citekey order="4">skeggs_formations_1997</bcf:citekey>
+    <bcf:citekey order="1">breton_levolution_2022</bcf:citekey>
+    <bcf:citekey order="1">pison_covid-19_2022</bcf:citekey>
+    <bcf:citekey order="1">papon_bilan_2021</bcf:citekey>
+    <bcf:citekey order="2">remund_surmortalite_2021</bcf:citekey>
+    <bcf:citekey order="3">heligman_age_1980</bcf:citekey>
+    <bcf:citekey order="3">goldstein_secular_2011</bcf:citekey>
+    <bcf:citekey order="4">remund_surmortalite_2021</bcf:citekey>
+    <bcf:citekey order="5">breton_levolution_2019</bcf:citekey>
+    <bcf:citekey order="5">pison_france_2021</bcf:citekey>
+    <bcf:citekey order="6">remund_surmortalite_2021</bcf:citekey>
+    <bcf:citekey order="7">breton_levolution_2019</bcf:citekey>
+    <bcf:citekey order="7">remund_surmortalite_2021</bcf:citekey>
+    <bcf:citekey order="8">breton_levolution_2019</bcf:citekey>
+    <bcf:citekey order="9">breton_levolution_2019</bcf:citekey>
+    <bcf:citekey order="10">letourneur_suicide_2022</bcf:citekey>
+    <bcf:citekey order="10">olie_hospitalizations_2021</bcf:citekey>
+    <bcf:citekey order="11">gastineau_lepidemie_2022</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="apa">
