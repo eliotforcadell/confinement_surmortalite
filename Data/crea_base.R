@@ -1,4 +1,6 @@
-pacman::p_load(data.table, lubridate, magrittr, questionr, tidyverse, ggplot2)
+pacman::p_load(data.table, foreign, lubridate, magrittr, questionr, tidyverse, ggplot2)
+
+# 2018-2020 ----
 
 # Empilement des bases
 annees <- c(2018:2020, "20212022")
@@ -18,104 +20,130 @@ deces[, date_nais := ymd(paste(ANAIS,
 deces[, age := interval(date_nais, date_dec) %/% years(1)]
 
 
-# Dataframe ?volution de la mortalit? sur diff?rentes p?riode
-evolution_mortalite <- data.frame(annee = c(2018, 2019, 2020), premier_conf_M = NA, deuxieme_conf_M = NA, 
-                                  premier_conf_F = NA, deuxieme_conf_F = NA)
+# On conserve les décès des 18-29 ans survenus entre 2018 et 2020 en France métropolitaine
+deces <- deces[age >= 18 & age < 30 & ADEC %in% 2018:2020 & !(DEPDEC %in% 971:978)]
+
+
+# Aggrégation par jour
+deces_jours_1820 <- merge(
+  data.table(date_dec = seq(ymd("2018-01-01"), ymd("2020-12-31"), by = "days")),
+  deces[, .(ndec = as.numeric(.N)), 
+        keyby = .(date_dec)],
+  by = "date_dec", all.x = T)
+deces_jours_1820[, `:=`(ADEC = as.integer(format(date_dec, "%Y")),
+                        MDEC = as.integer(format(date_dec, "%m")),
+                        md_dec = format(date_dec, "%m-%d"))]
+
+
+# Moyenne 2018-2019
+deces_jours_1820 <- rbind(
+  deces_jours_1820,
+  deces_jours_1820[ADEC %in% 2018:2019, 
+                   .(ndec = mean(ndec), 
+                     ADEC = "2018-2019"), 
+                   keyby = md_dec],
+  fill = T)
+
+
+# Ajout du nombre de décès par sexe
+deces_jours_1820[deces[, .(ndec = as.numeric(.N)), 
+                       keyby = .(date_dec, SEXE)] %>%
+                   dcast(date_dec ~ SEXE, value.var = "ndec"),
+                 `:=`(ndec_fem = i.F, ndec_hom = i.M), 
+                 on = "date_dec"]
+
+# Moyenne 2018-2019  
+deces_jours_1820[deces_jours_1820[ADEC %in% c("2018", "2019"), 
+                                  .(ndec_fem = mean(ndec_fem), 
+                                    ndec_hom = mean(ndec_hom),
+                                    ADEC = "2018-2019"), keyby = "md_dec"],
+                 `:=`(ndec_fem = i.ndec_fem, 
+                      ndec_hom = i.ndec_hom), 
+                 on = c("ADEC", "md_dec")]
+
+deces_jours_1820[is.na(ndec), ndec := 0]
+deces_jours_1820[is.na(ndec_fem), ndec_fem := 0]
+deces_jours_1820[is.na(ndec_hom), ndec_hom := 0]
 
 
 
-# Nombre de mort hommes entre 18 et 30 ans, en 2018, 2019 et 2020, entre les dates du premier confinnement, 
-# seulement le premier mois pour calculer un taux de mortalit? par mois comparable.
-evolution_mortalite[1,"premier_conf_M"] <- count(deces[deces$date_dec >= "2018-03-17" & deces$date_dec <= "2018-04-17" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
+# 2014-2017 ----
+deces_1417 <- lapply(2014:2017, 
+                     function(an) read.dbf(sprintf("Data/2014-2017/etatcivil%i_dec%i_dbase/dec%i.dbf", an, an, an),
+                                           as.is = T) %>%
+                       as.data.table()) %>%
+  rbindlist() %>% data.table()
 
-evolution_mortalite[2,"premier_conf_M"] <- count(deces[deces$date_dec >= "2019-03-17" & deces$date_dec <= "2019-04-17" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
+deces_1417[, c("ADEC", "MDEC", "ANAIS") := lapply(.SD, as.integer),
+           .SDcols = c("adec", "mdec", "anais")]
+deces_1417 <- deces_1417[, age := ADEC - ANAIS][age >= 18 & age < 30 &
+                                                  !(depdec %in% 971:978)]
 
-evolution_mortalite[3,"premier_conf_M"] <- count(deces[deces$date_dec >= "2020-03-17" & deces$date_dec <= "2020-04-17" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
+# Nombre de morts journalier imputé à partir du nombre de morts mensuel
+nbjours_mois <- data.table(
+  date_dec = seq(ymd("2014-01-01"), ymd("2017-12-31"), 
+                 by = "days"))[, .(nbjours = .N), 
+                               keyby = .(ADEC = as.numeric(format(date_dec, "%Y")),
+                                         MDEC = as.numeric(format(date_dec, "%m")))] 
 
-# Deuxi?me confinement
-
-evolution_mortalite[1,"deuxieme_conf_M"] <- count(deces[deces$date_dec >= "2018-10-30" & deces$date_dec <= "2018-11-30" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
-
-evolution_mortalite[2,"deuxieme_conf_M"] <- count(deces[deces$date_dec >= "2019-10-30" & deces$date_dec <= "2019-11-30" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
-
-evolution_mortalite[3,"deuxieme_conf_M"] <- count(deces[deces$date_dec >= "2020-10-30" & deces$date_dec <= "2020-11-30" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "M",])
-
-# Pour les femmes
-# premier confinement
-evolution_mortalite[1,"premier_conf_F"] <- count(deces[deces$date_dec >= "2018-03-17" & deces$date_dec <= "2018-04-17" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
-
-evolution_mortalite[2,"premier_conf_F"] <- count(deces[deces$date_dec >= "2019-03-17" & deces$date_dec <= "2019-04-17" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
-
-evolution_mortalite[3,"premier_conf_F"] <- count(deces[deces$date_dec >= "2020-03-17" & deces$date_dec <= "2020-04-17" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
-
-# Deuxi?me confinement
-
-evolution_mortalite[1,"deuxieme_conf_F"] <- count(deces[deces$date_dec >= "2018-10-30" & deces$date_dec <= "2018-11-30" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
-
-evolution_mortalite[2,"deuxieme_conf_F"] <- count(deces[deces$date_dec >= "2019-10-30" & deces$date_dec <= "2019-11-30" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
-
-evolution_mortalite[3,"deuxieme_conf_F"] <- count(deces[deces$date_dec >= "2020-10-30" & deces$date_dec <= "2020-11-30" 
-            & deces$age >= 18 & deces$age <= 30 & deces$SEXE == "F",])
+deces_1417[nbjours_mois, nbjours_mois := i.nbjours, , on = c("ADEC", "MDEC")
+][, ndec_jour := .N/nbjours_mois, keyby = .(ADEC, MDEC)]
 
 
-
-evolution_mortalite$population_M_18_30 <- NA
-evolution_mortalite$population_F_18_30 <- NA
-
-#population au premier janvier 2020
-#Hommes  entre 18 et 30 =	4 822 540
-evolution_mortalite$population_M_18_30[evolution_mortalite$annee == 2020] <- 4822540
-#Femmes entre 18 et 30 =	4 776 592
-evolution_mortalite$population_F_18_30[evolution_mortalite$annee == 2020] <- 4776592
-
-#Population au premier janvier 2019
-# Hommes 18 - 30 4 834 216
-evolution_mortalite$population_M_18_30[evolution_mortalite$annee == 2019] <- 4834216
-# Femmes 18 - 30 4 796 563
-evolution_mortalite$population_F_18_30[evolution_mortalite$annee == 2019] <- 4796563
-
-#Population au premier janvier 2018
-#hommes 18 - 30 4 858 295
-evolution_mortalite$population_M_18_30[evolution_mortalite$annee == 2018] <- 4858295
-#femmes 18 - 30	4 824 962
-evolution_mortalite$population_F_18_30[evolution_mortalite$annee == 2018] <- 4824962
+deces_1417[deces_1417[, .(ndec = as.numeric(.N/nbjours_mois)), 
+                      keyby = .(ADEC, MDEC, 
+                                SEXE = factor(sexe, labels = c("M", "F")))] %>%
+             unique() %>%
+             dcast(ADEC + MDEC ~ SEXE, value.var = "ndec"),
+           `:=`(ndec_fem = i.F, ndec_hom = i.M), 
+           on = c("ADEC", "MDEC")]
 
 
-#Taux de mortalit? pour 100 000 pour le mois du premier confinement chaque ann?es
-#Homme
-evolution_mortalite$taux_mortalite_premier_conf_M <- (evolution_mortalite$premier_conf_M/evolution_mortalite$population_M_18_30) * 100000
-# Femme
-evolution_mortalite$taux_mortalite_premier_conf_F <- (evolution_mortalite$premier_conf_F/evolution_mortalite$population_F_18_30) * 100000
-
-#Taux de mortalit? pour 100 000 pour le mois du deuxieme confinement chaque ann?es
-#Homme
-evolution_mortalite$taux_mortalite_deuxieme_conf_M <- (evolution_mortalite$deuxieme_conf_M/evolution_mortalite$population_M_18_30) * 100000
-# Femme
-evolution_mortalite$taux_mortalite_deuxieme_conf_F <- (evolution_mortalite$deuxieme_conf_F/evolution_mortalite$population_F_18_30) * 100000
+deces_jours_1417 <- merge(
+  data.table(date_dec = seq(ymd("2014-01-01"), ymd("2017-12-31"), by = "days")
+  )[, `:=`(ADEC = as.numeric(format(date_dec, "%Y")), 
+           MDEC = as.numeric(format(date_dec, "%m")))],
+  deces_1417[, .(ADEC, MDEC, ndec = ndec_jour, 
+                 ndec_fem, ndec_hom)] %>% unique(),
+  by = c("ADEC", "MDEC"), all.x = T)
+deces_jours_1417[, md_dec := format(date_dec, "%m-%d")]
 
 
-taux_plot <- ggplot(evolution_mortalite, aes(x = annee)) +  
-  geom_line(aes(y = taux_mortalite_premier_conf_M), color = "blue") +
-  geom_line(aes(y = taux_mortalite_premier_conf_F), color = "red") +
-  geom_line(aes(y = taux_mortalite_deuxieme_conf_M), color = "blue", linetype = "dashed") +
-  geom_line(aes(y = taux_mortalite_deuxieme_conf_F), color = "red", linetype = "dashed") +
-  scale_x_continuous(breaks = c(2018, 2019, 2020))
-
-taux_plot
+deces_jours <- rbind(deces_jours_1820,
+                     deces_jours_1417)
 
 
-# Exportation de la base complète
-# fwrite(deces, "Data/deces_2018-2022.csv")
+# Moyenne 2014-2019 ----
+deces_jours <- rbind(deces_jours,
+                     deces_jours[ADEC %in% 2014:2019, 
+                                 .(ndec = mean(ndec),
+                                   ndec_fem = mean(ndec_fem),
+                                   ndec_hom = mean(ndec_hom),
+                                   ADEC = "2014-2019",
+                                   MDEC = unique(MDEC)), 
+                                 keyby = md_dec], fill = T)
 
 
+# Périodes :
+# 1 : 1er janvier - 16 mars
+# 2 : 17 mars - 10 mai
+# 3 : 11 mai - 29 octobre
+# 4 : 30 octobre - 14 décembre
+# 5 : 15 décembre - 31 décembre
+
+deces_jours[, periode := fcase(md_dec >= "01-01" & md_dec <= "03-16", 1,
+                               md_dec >= "03-17" & md_dec <= "05-10", 2,
+                               md_dec >= "05-11" & md_dec <= "10-29", 3,
+                               md_dec >= "10-30" & md_dec <= "12-14", 4,
+                               md_dec >= "12-15" & md_dec <= "12-31", 5)]
+
+labs_per <- c("1 jan - 16 mar", "17 mar - 10 mai", "11 mai - 29 oct",
+              "30 oct - 14 déc", "15 déc - 31 déc")
+
+# Nom du jour de la semaine, jour de weekend
+deces_jours[, weekday_dec := format(date_dec, "%a")]
+deces_jours[, weekend := fifelse(weekday_dec %in% c("Sat", "Sun"), 1, 0)]
+
+
+# On ne conserve finalement pas les moyennes dans la base finale
+fwrite(deces_jours[ADEC %in% 2014:2020], "Data/deces_jours_2014-2020.csv")
